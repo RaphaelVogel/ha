@@ -1,0 +1,14 @@
+{
+  "name": "HAServer",
+  "version": "1.0.0",
+  "description": "Home automation package to provide a REST API to control actors and read sensors as well as a core rule engine",
+  "main": "webserver.js",
+  "author": "Raphael Vogel",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "express": "^4.9.7",
+    "tinkerforge":"^2.0.2",
+    "cron":"^1.0.5",
+    "async":"^0.9.0" 
+  }
+}
