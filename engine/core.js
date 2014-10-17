@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 var async = require('async');
 var zisterne = require('../tf_modules/zisterne');
 
-var jobZisterneTemperature = new CronJob('*/10 * * * * *', 
+var jobZisterne = new CronJob('*/10 * * * * *', 
     function(){ // job starts
         zisterne.readTemperature(function(err, temp){
             if(err){
@@ -10,7 +10,6 @@ var jobZisterneTemperature = new CronJob('*/10 * * * * *',
                 return;
             } else{
                 console.log("Temperature: "+temp);
-                //cb(null);
             }
         });
            
@@ -20,7 +19,6 @@ var jobZisterneTemperature = new CronJob('*/10 * * * * *',
                 return;
             } else{
                 console.log("Water level: "+level);
-                //cb(null);
             }
         });
     }, 
