@@ -28,3 +28,12 @@ var jobZisterne = new CronJob('* */15 * * * *',
     },
     true
 );
+
+process.on('SIGINT', function() {
+  db.close();
+  process.exit(0);
+});
+process.on('SIGTERM', function() {
+  db.close();
+  process.exit(0);
+});
