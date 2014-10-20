@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 var async = require('async');
 var zisterne = require('../tf_modules/zisterne');
 var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('../ha.data');
+var db = new sqlite3.Database('../ha.db');
 
 var jobZisterne = new CronJob('00 */20 * * * *', 
     function(){ // job starts
