@@ -4,7 +4,7 @@ var zisterne = require('../tf_modules/zisterne');
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('../ha.data');
 
-var jobZisterne = new CronJob('00 */15 * * * *', 
+var jobZisterne = new CronJob('00 */20 * * * *', 
     function(){ // job starts
         zisterne.readTemperature(function(err, temp){
             if(err){
