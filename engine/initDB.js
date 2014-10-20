@@ -1,5 +1,5 @@
 var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('../ha.data');
+var db = new sqlite3.Database('../ha.db');
 
 db.serialize(function(){
     db.run("CREATE TABLE IF NOT EXISTS device (device_id INTEGER NOT NULL, name TEXT NOT NULL, type TEXT, location TEXT, picture BLOB, PRIMARY KEY(device_id))");
