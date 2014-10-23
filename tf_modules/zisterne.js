@@ -14,7 +14,6 @@ exports.readTemperature = function(cb){
     });
 
     ipcon.on(TF.IPConnection.CALLBACK_CONNECTED, function(connectReason) {
-        masterBrick.setWifiPowerMode(TF.BrickMaster.WIFI_POWER_MODE_LOW_POWER);
         // Get temperature
         tempBricklet.getTemperature(
             function(temp) {
@@ -41,7 +40,6 @@ exports.readWaterLevel = function(cb){
     });
     
     ipcon.on(TF.IPConnection.CALLBACK_CONNECTED, function(connectReason) {
-        masterBrick.setWifiPowerMode(TF.BrickMaster.WIFI_POWER_MODE_LOW_POWER);
         // Get water level
         distUSBricklet.getDistanceValue(
             function(distance){
