@@ -1,4 +1,4 @@
 .DS_Store
 node_modules/
 ha.db
-webserver/public
+webserver/ui5lib

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<mvc:View controllerName="haui.Overview" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<Page title="Home Automation" enableScrolling="false">
+		<headerContent>
+			<Button icon="sap-icon://refresh" press="refresh" />
+		</headerContent>
+		<TileContainer id="tileContainer" width="100%">
+			<StandardTile
+				id="temperature"
+				icon="sap-icon://temperature"
+				title="Temperatur"
+				number="0"
+				numberUnit="Grad"
+				press="handleTilePress"/>
+		</TileContainer>	
+	</Page>
+</mvc:View>

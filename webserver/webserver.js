@@ -13,6 +13,6 @@ app.get("/", function (req, res) {
 });
 
 // register middleware
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/'));
 
 app.listen(port);
