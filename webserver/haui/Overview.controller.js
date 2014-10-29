@@ -1,6 +1,7 @@
 sap.ui.controller("haui.Overview", {
 	onInit: function() {
-	
+        var tempModel = new sap.ui.model.json.JSONModel("/weather/temperature");
+        this.getView().byId("weather").setModel(tempModel);
 	},
 	
 	handleTilePress: function(oEvent) {

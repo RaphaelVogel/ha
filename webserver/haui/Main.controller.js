@@ -1,7 +1,7 @@
 sap.ui.controller("haui.Main", {
 	onInit: function() {
 		// get configuration
-		sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel("haui/config.json"), "haconfig");
+		sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel("haui/config.json"), "config");
 		
 		// Set up navigation handling
 		var oBus = sap.ui.getCore().getEventBus();

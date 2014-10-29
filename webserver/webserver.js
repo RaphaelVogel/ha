@@ -4,8 +4,8 @@ var express    = require('express'),
 var port = 8080;
 
 // Register routes
-var zisterne = require('./routes/route_zisterne.js');
-app.use('/zisterne', zisterne);
+var weather = require('./routes/route_weather.js');
+app.use('/weather', weather);
 
 // redirect root access to index.html
 app.get("/", function (req, res) {
