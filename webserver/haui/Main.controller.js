@@ -1,8 +1,5 @@
 sap.ui.controller("haui.Main", {
 	onInit: function() {
-		// get configuration
-		sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel("haui/config.json"), "config");
-		
 		// Set up navigation handling
 		var oBus = sap.ui.getCore().getEventBus();
 		oBus.subscribe("nav", "to", this.navToHandler, this);
@@ -12,7 +9,7 @@ sap.ui.controller("haui.Main", {
 	navToHandler : function(channelId, eventId, data) {
 		var mainView = this.getView();
 		var haApp = mainView.byId("haapp");
-		haApp.to(mainView.byId(data.id), data.context);
+		haApp.to(mainView.byId(data.id));
 	},
 
 	navBackHandler : function(channelId, eventId, data) {

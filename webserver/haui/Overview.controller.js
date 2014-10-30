@@ -1,13 +1,11 @@
 sap.ui.controller("haui.Overview", {
 	onInit: function() {
         var tempModel = new sap.ui.model.json.JSONModel("/weather/temperature");
-        this.getView().byId("weather").setModel(tempModel);
+        this.getView().byId("Weather").setModel(tempModel);
 	},
 	
 	handleTilePress: function(oEvent) {
-		sap.ui.getCore().getEventBus().publish("nav", "to", {
-			id : "Temperature",
-			context: oEvent.getSource().getBindingContext()
-		});
+		var tileId = oEvent.getSource().getId().substring("Mainview--Overview--".length);
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : tileId});
 	}
 });

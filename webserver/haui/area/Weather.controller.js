@@ -1,4 +1,4 @@
-sap.ui.controller("haui.Temperature", {
+sap.ui.controller("haui.area.Weather", {
 	onInit: function() {
 	
 	},

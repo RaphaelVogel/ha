@@ -6,7 +6,7 @@
 		</headerContent>
         <TileContainer id="tileContainer" width="100%">
 			<StandardTile
-                id="weather"
+                id="Weather"
                 icon="sap-icon://temperature"
                 title="Wetterdaten: Temperatur, Luftdruck und Luftfeutigkeit"
                 info="Außenbereich"
@@ -14,7 +14,7 @@
                 numberUnit="Grad"
                 press="handleTilePress"/>
             <StandardTile
-                id="alarm"
+                id="Alarm"
                 icon="sap-icon://alert"
                 title="Alarmanlage steuern"
                 type="Monitor"

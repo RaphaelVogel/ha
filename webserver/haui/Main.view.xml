@@ -2,6 +2,7 @@
 <core:View controllerName="haui.Main" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<App id="haapp">
 		<mvc:XMLView viewName="haui.Overview" id="Overview" />
-		<mvc:XMLView viewName="haui.Temperature" id="Temperature" />
+		<mvc:XMLView viewName="haui.area.Weather" id="Weather" />
+		<mvc:XMLView viewName="haui.area.Alarm" id="Alarm" />
 	</App>
 </core:View>
