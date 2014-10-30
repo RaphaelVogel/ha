@@ -1,7 +1,7 @@
 var express    = require('express'),
     app        = express();
 
-var port = 8080;
+global.fake = true;
 
 // Register routes
 var weather = require('./routes/route_weather.js');
@@ -15,4 +15,4 @@ app.get("/", function (req, res) {
 // register middleware
 app.use(express.static(__dirname + '/'));
 
-app.listen(port);
+app.listen(8080);

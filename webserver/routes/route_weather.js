@@ -8,6 +8,11 @@ var waterLevelRoute = router.route('/waterlevel');
 
 // Temperature API
 tempRoute.get(function(req, res){
+	if(global.fake === true){
+		console.log("In fake");
+		res.status(200).send({ "temperature" : 15.8 });
+		return;
+	}
     zisterne.readTemperature(function(err, temp){
         if(err){
             res.status(500).send({ "ERROR" : "Could not read temperature" });
