@@ -8,7 +8,7 @@
 			<StandardTile
                 id="Weather"
                 icon="sap-icon://temperature"
-                title="Wetterdaten: Temperatur, Luftdruck und Luftfeutigkeit"
+                title="Wetter: Temperatur Luftdruck Luftfeutigkeit"
                 info="Außenbereich"
                 number="{/temperature}"
                 numberUnit="Grad"
