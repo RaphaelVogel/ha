@@ -1,6 +1,6 @@
 var CronJob = require('cron').CronJob;
 var async = require('async');
-var zisterne = require('../tf_modules/zisterne');
+var zisterne = require('../access_modules/zisterne');
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('../ha.db');
 

@@ -1,11 +1,14 @@
 var express    = require('express'),
     app        = express();
 
-global.fake = false;
+global.fake = true;
 
 // Register routes
 var weather = require('./routes/route_weather.js');
 app.use('/weather', weather);
+
+var solar = require('./routes/route_solar.js');
+app.use('/solar', solar);
 
 // redirect root access to index.html
 app.get("/", function (req, res) {
