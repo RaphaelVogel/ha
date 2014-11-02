@@ -11,7 +11,7 @@
                 title="Wetter: Temperatur Luftdruck Luftfeutigkeit"
                 info="Außenbereich"
                 number="{/temperature}"
-                numberUnit="Grad"
+                numberUnit="{/temperatureUnit}"
                 press="handleTilePress"/>
             <StandardTile
                 id="Alarm"
@@ -21,6 +21,14 @@
                 info="Alles Ok"
                 infoState="Success"
                 press="handleTilePress"/>
+			<StandardTile
+                id="Solar"
+                icon="sap-icon://temperature"
+                title="Solaranalge"
+                info="Außenbereich"
+                number="{/current}"
+                numberUnit="{/currentUnit}"
+                press="handleTilePress"/>              
 		</TileContainer>
 	</Page>
 </mvc:View>
