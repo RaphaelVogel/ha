@@ -23,7 +23,7 @@
                 press="handleTilePress"/>
 			<StandardTile
                 id="Solar"
-                icon="sap-icon://temperature"
+                icon="sap-icon://home"
                 title="Solaranalge"
                 info="Außenbereich"
                 number="{/current}"
