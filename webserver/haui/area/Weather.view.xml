@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mvc:View controllerName="haui.area.Weather" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+<mvc:View controllerName="haui.area.Weather" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit">
 	<Page
 		title="Wetter Daten"
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
+		
+		<ma:Chart id="temperatureChart" height="50%" width="100%" type="Line"
+			rows="{tempValues}" showRangeSelector="false" showTableView="false"
+			showTotalValue="false">
+			<ma:category>
+				<ma:Category column="measurementdate" displayName="Datum" />
+			</ma:category>
+			<ma:values>
+				<ma:Value expression="temperature" displayName="Temperatur" />
+			</ma:values>
+			<ma:rows>
+				<ma:Row>
+					<ma:cells>
+						<ma:Column name="temperature" value="{temperature}" type="number" />
+					</ma:cells>
+				</ma:Row>
+			</ma:rows>
+			<ma:columns>
+				<ma:Column name="measurementdate" value="{datetime}" type="datetime" />
+			</ma:columns>
+		</ma:Chart>
 		
 	</Page>
 </mvc:View>
