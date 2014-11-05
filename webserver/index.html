@@ -17,6 +17,7 @@
         </script>
 
         <script>
+			jQuery.sap.require("haui.Util");
             sap.ui.getCore().attachInit(function() {
 				sap.ui.xmlview("Mainview", "haui.Main").placeAt("content");
             });
