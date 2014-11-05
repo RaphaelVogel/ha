@@ -8,7 +8,7 @@
 			<StandardTile
                 id="Weather"
                 icon="sap-icon://temperature"
-                title="Wetter: Temperatur Luftdruck Luftfeutigkeit"
+                title="Temperatur Luftdruck und Luftfeutigkeit"
                 info="Außenbereich"
                 number="{/temperature}"
                 numberUnit="{/temperatureUnit}"
@@ -17,7 +17,6 @@
                 id="Alarm"
                 icon="sap-icon://alert"
                 title="Alarmanlage steuern"
-                type="Monitor"
                 info="Alles Ok"
                 infoState="Success"
                 press="handleTilePress"/>

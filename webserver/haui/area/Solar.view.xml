@@ -5,5 +5,6 @@
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
 		
+		
 	</Page>
 </mvc:View>
