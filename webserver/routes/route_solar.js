@@ -8,7 +8,7 @@ var solarRoute = router.route('/data');
 solarRoute.get(function(req, res){
     solar.readData(function(err, solardata){
     if(err){
-        res.status(500).send({ "ERROR" : "Could not read current production" });
+        res.status(500).send({ "ERROR" : err });
         return;
     }
     res.status(200).send(solardata);

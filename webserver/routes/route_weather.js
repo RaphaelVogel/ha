@@ -8,7 +8,7 @@ var tempRoute = router.route('/temperature');
 tempRoute.get(function(req, res){
     weather.readTemperature(function(err, tempdata){
         if(err){
-            res.status(500).send({ "ERROR" : "Could not read temperature" });
+            res.status(500).send({ "ERROR" : err });
             return;
         }
         res.status(200).send(tempdata);

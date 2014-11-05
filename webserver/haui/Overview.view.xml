@@ -24,7 +24,6 @@
                 id="Solar"
                 icon="sap-icon://home"
                 title="Solaranalge"
-                info="Außenbereich"
                 number="{/current}"
                 numberUnit="{/currentUnit}"
                 press="handleTilePress"/>              
