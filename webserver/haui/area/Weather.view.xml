@@ -7,9 +7,9 @@
 		
 		<ma:Chart id="temperatureChart" height="50%" width="100%" type="Line"
 			rows="{/tempValues}" showRangeSelector="true" showTableView="false"
-			showTotalValue="false">
+			showTotalValue="false" >
 			<ma:category>
-				<ma:Category column="measurementdate" displayName="Datum" />
+				<ma:Category column="measurementdate" displayName="Datum und Zeit" />
 			</ma:category>
 			<ma:values>
 				<ma:Value expression="temperature" displayName="Temperatur C°" />
