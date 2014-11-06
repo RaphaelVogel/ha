@@ -1,7 +1,7 @@
 var request = require('request');
 
 var solardata = {
-    "current": "5.47",
+    "current": "5.48",
     "currentUnit": "kW",
     "day": "7.05",
     "dayUnit": "kWh",

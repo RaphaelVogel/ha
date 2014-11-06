@@ -1,6 +1,6 @@
 sap.ui.controller("haui.area.Weather", {
 	onInit: function() {
-		var data = {
+		var tempData = {
 			"tempValues": [
 				{"temperature":"18.2", "measureDate": "2014-10-31 08:16:49"},
 				{"temperature":"19.6", "measureDate": "2014-10-31 08:43:20"},
@@ -58,9 +58,9 @@ sap.ui.controller("haui.area.Weather", {
 		};
 	
 	    var tempChartModel = new sap.ui.model.json.JSONModel();
-        tempChartModel.setData(data);
+        tempChartModel.setData(tempData);
 		this.getView().byId("temperatureChart").setModel(tempChartModel);
-		this.getView().byId("temperatureChart").setRangeSelectorStartPosition(data.tempValues.length - 8);
+		this.getView().byId("temperatureChart").setRangeSelectorStartPosition(tempData.tempValues.length - 8);
 		
 	},
 	handleNavButtonPress: function(oEvent) {

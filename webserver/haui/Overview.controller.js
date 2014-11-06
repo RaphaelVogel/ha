@@ -1,9 +1,11 @@
 sap.ui.controller("haui.Overview", {
 	onInit: function() {
-        var tempModel = new sap.ui.model.json.JSONModel("/weather/temperature");
+        var tempModel = new sap.ui.model.json.JSONModel();
+		tempModel.loadData("/weather/temperature");
         this.getView().byId("Weather").setModel(tempModel);
         
-        var solarModel = new sap.ui.model.json.JSONModel("/solar/data");
+        var solarModel = new sap.ui.model.json.JSONModel();
+		solarModel.loadData("/solar/data");
         var solarTile = this.getView().byId("Solar");
         solarTile.setModel(solarModel);
         solarModel.attachRequestCompleted(function(){
@@ -19,5 +21,6 @@ sap.ui.controller("haui.Overview", {
 	handleTilePress: function(oEvent) {
 		var tileId = oEvent.getSource().getId().substring("Mainview--Overview--".length);
 		sap.ui.getCore().getEventBus().publish("nav", "to", {id : tileId});
-	}
+	},
+	
 });

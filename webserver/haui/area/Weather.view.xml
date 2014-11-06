@@ -5,7 +5,7 @@
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
 		
-		<ma:Chart id="temperatureChart" height="50%" width="100%" type="Line"
+		<ma:Chart id="temperatureChart" height="90%" width="100%" type="Line"
 			rows="{/tempValues}" showRangeSelector="true" showTableView="false"
 			showTotalValue="false" >
 			<ma:category>
