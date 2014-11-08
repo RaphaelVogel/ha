@@ -10,6 +10,9 @@ app.use('/weather', weather);
 var solar = require('./routes/route_solar.js');
 app.use('/solar', solar);
 
+var zwave = require('./routes/route_zwave.js');
+app.use('/zwave', zwave);
+
 // redirect root access to index.html
 app.get("/", function (req, res) {
   res.redirect("/index.html");
