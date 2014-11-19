@@ -3,7 +3,8 @@
 	<App id="haapp">
 		<mvc:XMLView viewName="haui.Overview" id="Overview" />
 		<mvc:XMLView viewName="haui.area.Weather" id="Weather" />
-        <mvc:XMLView viewName="haui.area.Alarm" id="Alarm" />
+        <mvc:XMLView viewName="haui.area.HomeControl" id="HomeControl" />
         <mvc:XMLView viewName="haui.area.Solar" id="Solar" />
+		<mvc:XMLView viewName="haui.area.Alarm" id="Alarm" />
 	</App>
 </core:View>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mvc:View controllerName="haui.area.HomeControl" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<Page id="HomeControlPage"
+		title="Haussteuerung"
+		showNavButton="true"
+		navButtonPress="handleNavButtonPress">
+		<headerContent>
+			<Button icon="sap-icon://refresh" press="handleRefreshPress" />
+		</headerContent>
+		<List>
+			<items>
+				<InputListItem label="Wohnzimmer Lampe">
+					<Switch state="{path: '/xxxxx', formatter: 'haui.Util.stringToBool'}" />
+				</InputListItem>
+			</items>
+		</List>		
+	</Page>
+</mvc:View>

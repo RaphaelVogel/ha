@@ -11,9 +11,9 @@
                 numberUnit="{/temperatureUnit}"
                 press="handleTilePress"/>
             <StandardTile
-                id="Alarm"
-                icon="sap-icon://alert"
-                title="Alarmanlage steuern"
+                id="HomeControl"
+                icon="sap-icon://action-settings"
+                title="Haussteuerung"
                 info="Alles Ok"
                 infoState="Success"
                 press="handleTilePress"/>
@@ -23,7 +23,14 @@
                 title="Solaranalge"
                 number="{/current}"
                 numberUnit="{/currentUnit}"
-                press="handleTilePress"/>              
+                press="handleTilePress"/>
+            <StandardTile
+                id="Alarm"
+                icon="sap-icon://alert"
+                title="Alarmanlage steuern"
+                info="Alles Ok"
+                infoState="Success"
+                press="handleTilePress"/>				
 		</TileContainer>
 	</Page>
 </mvc:View>

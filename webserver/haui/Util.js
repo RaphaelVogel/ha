@@ -8,5 +8,17 @@ haui.Util = {
 		var outDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({pattern: "dd.MM.yy - HH:mm"});
 		var inDate = inDateFormat.parse(value);
 		return outDateFormat.format(inDate);
+	},
+	
+	stringToBool: function(stringVal){
+		if(!stringVal) return;
+		if(stringVal === "ON"){
+			return true;
+		}
+		else if(stringVal === "OFF"){
+			return false
+		}
+		else
+			return null;
 	}
 };
