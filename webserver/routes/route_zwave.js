@@ -1,65 +1,28 @@
-var request = require('request');
+var zwave = require('../../access_modules/zwave.js');
 var express = require('express');
 var router = express.Router();
 
-var livingroomLightSet = router.route('/livingroomLight/:state');
-livingroomLightSet.get(function(req, res){
-    if(global.fake === true){
-        res.status(200).send({"livingroomLight": req.param('state')});
-        return;
-	}
-    
-    if(req.param('state') === "ON"){
-        request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.Set(255)'}, 
-            function(error, response, body){
-                if (error){
-                    res.status(500).send({ "ERROR" : error });
-                }
-                else{
-                    res.status(200).send({"livingroomLight":"ON"});
-                }
-            }
-        );
-    }
-    else if(req.param('state') === "OFF"){
-        request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.Set(0)'}, 
-            function(error, response, body){
-                if (error){
-                    res.status(500).send({ "ERROR" : error });
-                }
-                else {
-                   res.status(200).send({"livingroomLight":"OFF"}); 
-                }
-            }
-        );
-    }
+var livingroomLightRoute = router.route('/livingroomLight/:state');
+livingroomLightRoute.get(function(req, res){
+	var state = req.param('state');
+    zwave.setLivingroomLight(state, function(err, zwaveData){
+		if(err){
+			res.status(500).send({ "ERROR" : err });
+			return;
+		}
+		res.status(200).send(zwaveData);
+    });
 });
 
-var livingroomLightGet = router.route('/livingroomLight');
-livingroomLightGet.get(function(req, res){
-    if(global.fake === true){
-        res.status(200).send({"livingroomLight":"ON"});
-        return;
-	}
-    
-    request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.data.level.value'}, 
-        function(error, response, body){
-            if (error){
-                res.status(500).send({ "ERROR" : error });
-            }
-            else {
-                if(body == 'true'){
-                    res.status(200).send({"livingroomLight":"ON"}); 
-                }
-                else {
-                    res.status(200).send({"livingroomLight":"OFF"});
-                }
-
-            }
-        }
-    );
-
-
+var zwaveStatusRoute = router.route('/state');
+zwaveStatusRoute.get(function(req, res){
+    zwave.readDevicesStatus(function(err, zwaveData){
+		if(err){
+			res.status(500).send({ "ERROR" : err });
+			return;
+		}
+		res.status(200).send(zwaveData);
+    });
 });
 
 module.exports = router;

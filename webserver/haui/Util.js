@@ -20,5 +20,17 @@ haui.Util = {
 		}
 		else
 			return null;
-	}
+	},
+	
+	boolToString: function(boolVal){
+		if(boolVal === undefined) return;
+		if(boolVal === true){
+			return "ON";
+		}
+		else if(boolVal === false){
+			return "OFF";
+		}
+		else
+			return null;
+	}	
 };
