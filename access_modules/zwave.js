@@ -8,7 +8,7 @@ exports.readDevicesStatus = function(cb){
     if(global.fake === true){
         cb(null, devicesState);
         return;
-	}	
+	}
 	
 	// Read complete status of all zwave sensors/actors    
 	// request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.data.level.value'}, 
