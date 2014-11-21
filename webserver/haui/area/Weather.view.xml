@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mvc:View controllerName="haui.area.Weather" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit">
-	<Page id="chartPage"
+<mvc:View controllerName="haui.area.Weather" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit" xmlns:l="sap.ui.layout">
+	<Page id="weatherPage"
 		title="Wetter Daten"
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
-		
-		<ma:Chart id="temperatureChart" height="90%" width="100%" type="Line"
-			rows="{/tempValues}" showRangeSelector="true" showTableView="false"
-			showTotalValue="false" >
-			<ma:category>
-				<ma:Category column="measurementdate" displayName="Datum und Zeit" />
-			</ma:category>
-			<ma:values>
-				<ma:Value expression="temperature" displayName="Temperatur C°" />
-			</ma:values>
-			<ma:columns>
-				<ma:Column name="temperature" value="{temperature}" type="number" />
-				<ma:Column name="measurementdate" value="{path: 'measureDate', formatter: 'haui.Util.dateFormatter'}" />
-			</ma:columns>
-		</ma:Chart>
-	
+		<headerContent>
+			<Button icon="sap-icon://refresh" press="handleRefreshPress" />
+		</headerContent>
+		<List>
+			<items>
+				<DisplayListItem id="temperatureItem" label="Temperatur" value="{weatherModel>/temperature} {weatherModel>/temperatureUnit}" type="Navigation" press="handleListItemPress" />
+				<DisplayListItem id="humidityItem" label="Luftfeuchtigkeit" value="{weatherModel>/humidity} {weatherModel>/humidityUnit}" type="Navigation" press="handleListItemPress" />
+				<DisplayListItem id="pressureItem" label="Luftdruck" value="{weatherModel>/pressure} {weatherModel>/pressureUnit}" type="Navigation" press="handleListItemPress" />
+			</items>
+		</List>
 	</Page>
 </mvc:View>

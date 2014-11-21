@@ -1,12 +1,9 @@
 sap.ui.controller("haui.area.Solar", {
 	onInit: function() {
-		var solarModel = new sap.ui.model.json.JSONModel();
-		solarModel.loadData("/solar/data");
-        this.getView().byId("SolarPage").setModel(solarModel);
 	},
 	
 	handleRefreshPress: function(oEvent){
-		var solarModel = this.getView().byId("SolarPage").getModel();
+		var solarModel = sap.ui.getCore().getModel("solarModel");
 		solarModel.loadData("/solar/data");
 	},
 	

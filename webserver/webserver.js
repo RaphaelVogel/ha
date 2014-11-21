@@ -1,7 +1,7 @@
 var express    = require('express'),
     app        = express();
 
-global.fake = false;
+global.fake = true;
 
 // Register routes
 var weather = require('./routes/route_weather.js');

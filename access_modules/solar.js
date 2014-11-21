@@ -1,6 +1,6 @@
 var request = require('request');
 
-var solardata = {
+var solarData = {
     "current": "5.48",
     "currentUnit": "kW",
     "day": "7.05",
@@ -15,7 +15,7 @@ var solardata = {
 
 exports.readData = function(cb){
     if(global.fake === true){
-        cb(null, solardata);
+        cb(null, solarData);
         return;
 	}
     request.get({
@@ -40,21 +40,21 @@ exports.readData = function(cb){
             var arr = body.split(";");
             console.log(arr);
             var currentData = arr[1].split(" ");
-            solardata.current = currentData[0];
-            solardata.currentUnit = currentData[1];
+            solarData.current = currentData[0];
+            solarData.currentUnit = currentData[1];
             var dayData = arr[4].split(" ");
-            solardata.day = dayData[0];
-            solardata.dayUnit = dayData[1];
+            solarData.day = dayData[0];
+            solarData.dayUnit = dayData[1];
             var monthData = arr[7].split(" ");
-            solardata.month = monthData[0];
-            solardata.monthUnit = monthData[1];
+            solarData.month = monthData[0];
+            solarData.monthUnit = monthData[1];
             var yearData = arr[10].split(" ");
-            solardata.year = yearData[0];
-            solardata.yearUnit = yearData[1];
+            solarData.year = yearData[0];
+            solarData.yearUnit = yearData[1];
             var totalData = arr[13].split(" ");
-            solardata.total = totalData[0];
-            solardata.totalUnit = totalData[1];
-            cb(null, solardata);
+            solarData.total = totalData[0];
+            solarData.totalUnit = totalData[1];
+            cb(null, solarData);
         }
     );
 }
