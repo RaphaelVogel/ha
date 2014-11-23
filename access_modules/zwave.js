@@ -17,7 +17,6 @@ exports.readDevicesStatus = function(cb){
                 cb(error);
             }
             else{
-                console.log(body);
                 var state = (body.toString() === "false")?"OFF":"ON";
                 cb(null, {"livingroomLight":state});
             }
