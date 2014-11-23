@@ -1,5 +1,6 @@
 sap.ui.controller("haui.area.HomeControl", {
-	onInit: function() {
+	onBeforeRendering: function() {
+        alert("On before");
         this.refreshZWaveState();
 	},
     
