@@ -1,9 +1,13 @@
 sap.ui.controller("haui.area.HomeControl", {
 	onInit: function() {
-		var zwaveModel = new sap.ui.model.json.JSONModel();
+        this.refreshZWaveState();
+	},
+    
+    refreshZWaveState: function(){
+        var zwaveModel = new sap.ui.model.json.JSONModel();
 		zwaveModel.loadData("/zwave/state");
         this.getView().byId("HomeControlPage").setModel(zwaveModel);
-	},
+    },
 	
 	handleLivingroomLight: function(oEvent){
 		var state = oEvent.getSource().getState();
@@ -16,8 +20,7 @@ sap.ui.controller("haui.area.HomeControl", {
 	},
 	
 	handleRefreshPress: function(oEvent){
-		var zwaveModel = this.getView().byId("HomeControlPage").getModel();
-		zwaveModel.loadData("/zwave/state");
+        this.refreshZWaveState();
 	},
 	
 	handleNavButtonPress: function(oEvent) {
