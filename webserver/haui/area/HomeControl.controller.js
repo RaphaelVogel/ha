@@ -1,7 +1,10 @@
-sap.ui.controller("haui.area.HomeControl", {
-	onBeforeRendering: function() {
-        alert("On before");
-        this.refreshZWaveState();
+sap.ui.controller("haui.area.HomeControl", {    
+    onInit: function() {
+        this.getView().addEventDelegate({
+            onBeforeShow: function(evt) {
+                this.refreshZWaveState(); 
+            }
+        }, this);
 	},
     
     refreshZWaveState: function(){
