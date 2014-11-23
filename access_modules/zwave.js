@@ -11,8 +11,18 @@ exports.readDevicesStatus = function(cb){
 	}
 	
 	// Read complete status of all zwave sensors/actors    
-	// request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.data.level.value'}, 
-	
+	request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.data.level.value'}, 
+        function(error, response, body){
+            if (error){
+                cb(error);
+            }
+            else{
+                console.log(body);
+                var state = (body.toString() === "false")?"OFF":"ON";
+                cb(null, {"livingroomLight":state});
+            }
+        }
+	);
 }
 
 exports.setLivingroomLight = function(state, cb){
@@ -20,7 +30,8 @@ exports.setLivingroomLight = function(state, cb){
         cb(null, {"livingroomLight":state});
         return;
 	}
-	request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.Set('+(state === "ON")?"255":"0"+')'}, 
+    var onOff = (state === "ON")?"255":"0"
+	request.post({url: 'http://haserver:8083/ZWaveAPI/Run/devices[2].instances[0].SwitchBinary.Set('+ onOff +')'}, 
 		function(error, response, body){
 			if (error){
 				cb(error);
