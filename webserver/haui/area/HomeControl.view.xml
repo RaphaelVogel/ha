@@ -10,7 +10,7 @@
 		<List>
 			<items>
 				<InputListItem label="Wohnzimmer Lampe">
-					<Switch id="livingroomLightSwitch" state="{path: '/livingroomLight', formatter: 'haui.Util.stringToBool'}" customTextOn="An" customTextOff="Aus" change="handleLivingroomLight"/>
+					<Switch id="livingroomLightSwitch" state="{path: 'zwaveModel>/livingroomLight', formatter: 'haui.Util.stringToBool'}" customTextOn="An" customTextOff="Aus" change="handleLivingroomLight"/>
 				</InputListItem>
 			</items>
 		</List>		

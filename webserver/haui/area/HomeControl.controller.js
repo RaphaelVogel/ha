@@ -1,5 +1,7 @@
 sap.ui.controller("haui.area.HomeControl", {    
     onInit: function() {
+        var zwaveModel = new sap.ui.model.json.JSONModel();
+        sap.ui.getCore().setModel(zwaveModel, "zwaveModel");
         this.getView().addEventDelegate({
             onBeforeShow: function(evt) {
                 this.refreshZWaveState(); 
@@ -8,9 +10,8 @@ sap.ui.controller("haui.area.HomeControl", {
 	},
     
     refreshZWaveState: function(){
-        var zwaveModel = new sap.ui.model.json.JSONModel();
+        var zwaveModel = sap.ui.getCore().getModel("zwaveModel");
 		zwaveModel.loadData("/zwave/state");
-        this.getView().byId("HomeControlPage").setModel(zwaveModel);
     },
 	
 	handleLivingroomLight: function(oEvent){
