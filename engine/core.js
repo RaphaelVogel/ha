@@ -4,7 +4,7 @@ var weather = require('../access_modules/weather');
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('../ha.db');
 
-var jobZisterne = new CronJob('00 */15 * * * *', 
+var jobWeather = new CronJob('00 */15 * * * *', 
     function(){ // job starts
         weather.readWeatherData(function(err, weatherData){
             if(err){
