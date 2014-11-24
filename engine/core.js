@@ -1,25 +1,18 @@
 var CronJob = require('cron').CronJob;
 var async = require('async');
-var zisterne = require('../access_modules/zisterne');
+var weather = require('../access_modules/weather');
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('../ha.db');
 
-var jobZisterne = new CronJob('00 */20 * * * *', 
+var jobZisterne = new CronJob('00 */15 * * * *', 
     function(){ // job starts
-        zisterne.readTemperature(function(err, temp){
+        weather.readWeatherData(function(err, weatherData){
             if(err){
-                console.log(err);
                 return;
             } else{
-                db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,1,?)', [ temp ]);
-            }
-        });
-        zisterne.readWaterLevel(function(err, level){
-            if(err){
-                console.log(err);
-                return;
-            } else{
-                db.run('INSERT INTO sensordata (device_id, sensor_id, val_int) VALUES (1,2,?)', [ level ]);
+                db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,1,?)', [ weatherData.temperature ]);
+				db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.humidity ]);
+				db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.pressure ]);
             }
         });
     }, 

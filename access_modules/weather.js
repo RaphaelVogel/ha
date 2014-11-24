@@ -5,7 +5,7 @@ var PORT = 4223;
 
 var weatherData = {
 	"temperature" : "16.9", "temperatureUnit": "Grad",
-	"humidity" : "43.2", "humidityUnit" : "%",
+	"humidity" : "43.2", "humidityUnit" : "%RH",
 	"pressure" : "1013.6", "pressureUnit" : "mbar"
 };
 

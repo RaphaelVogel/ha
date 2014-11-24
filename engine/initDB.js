@@ -7,6 +7,7 @@ db.serialize(function(){
     db.run("CREATE TABLE IF NOT EXISTS sensordata (device_id INTEGER NOT NULL, sensor_id INTEGER NOT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, val_string TEXT, val_int INTEGER, val_real REAL)");    
 });
 
-db.run("INSERT OR IGNORE INTO device (device_id, name, type) VALUES (1, 'Zisterne', 'Tinkerforge')");
-db.run("INSERT OR IGNORE INTO sensor (device_id, sensor_id, name, type, unit) VALUES (1, 1, 'Temperatur Sensor', 'Tinkerforge', 'Grad Celsius')");
-db.run("INSERT OR IGNORE INTO sensor (device_id, sensor_id, name, type, unit) VALUES (1, 2, 'Ultraschall Sensor', 'Tinkerforge', 'Zentimeter')");
+db.run("INSERT OR IGNORE INTO device (device_id, name, type) VALUES (1, 'Wetter Station', 'Tinkerforge')");
+db.run("INSERT OR IGNORE INTO sensor (device_id, sensor_id, name, type, unit) VALUES (1, 1, 'Temperatur Sensor', 'Tinkerforge', 'Grad')");
+db.run("INSERT OR IGNORE INTO sensor (device_id, sensor_id, name, type, unit) VALUES (1, 2, 'Luftfeuchtigkeit', 'Tinkerforge', '%RH')");
+db.run("INSERT OR IGNORE INTO sensor (device_id, sensor_id, name, type, unit) VALUES (1, 3, 'Luftdruck', 'Tinkerforge', 'mBar')");
