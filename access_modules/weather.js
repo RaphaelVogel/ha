@@ -18,11 +18,11 @@ exports.readWeatherData = function(callback){
     var masterBrick = new TF.BrickMaster('6esCZX', ipcon);
     var tempBricklet = new TF.BrickletTemperature('dCf', ipcon);
     tempBricklet.setI2CMode(TF.BrickletTemperature.I2C_MODE_SLOW); // to prevent outlier
-	var humidityBricklet = new Tinkerforge.BrickletHumidity('', ipcon);
-	var barometerBricklet = new Tinkerforge.BrickletBarometer('', ipcon);
+	var humidityBricklet = new TF.BrickletHumidity('', ipcon);
+	var barometerBricklet = new TF.BrickletBarometer('', ipcon);
     
     ipcon.connect(HOST, PORT, function(error) {
-        callback("Could not open connection: "+error);        
+        callback("Could not open connection to Tinkerforge: "+error);        
     });
 
     ipcon.on(TF.IPConnection.CALLBACK_CONNECTED, function(connectReason) {

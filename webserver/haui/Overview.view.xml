@@ -10,7 +10,6 @@
                 id="Weather"
                 icon="sap-icon://temperature"
                 title="Temperatur Luftdruck und Luftfeutigkeit"
-                info="Außenbereich"
                 number="{weatherModel>/temperature}"
                 numberUnit="{weatherModel>/temperatureUnit}"
                 press="handleTilePress"/>
@@ -18,7 +17,8 @@
                 id="HomeControl"
                 icon="sap-icon://action-settings"
                 title="Haussteuerung"
-                info="Alles Ok"
+				type="Monitor"
+                info="Status: Ok"
                 infoState="Success"
                 press="handleTilePress"/>
 			<StandardTile
@@ -32,7 +32,8 @@
                 id="Alarm"
                 icon="sap-icon://alert"
                 title="Alarmanlage"
-                info="Alles Ok"
+				type="Monitor"
+                info="Status: OK"
                 infoState="Success"
                 press="handleTilePress"/>				
 		</TileContainer>
