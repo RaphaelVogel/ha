@@ -4,7 +4,7 @@ sap.ui.controller("haui.area.Weather", {
 	
 	handleRefreshPress: function(oEvent){
 		var weatherModel = sap.ui.getCore().getModel("weatherModel");
-		weatherModel.loadData("/weather/data");
+		weatherModel.loadData("/weather/currentData");
 	},
 	
 	handleNavButtonPress: function(oEvent) {

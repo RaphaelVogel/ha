@@ -2,7 +2,7 @@ var solar = require('../../access_modules/solar.js');
 var express = require('express');
 var router = express.Router();
 
-var solarRoute = router.route('/data');
+var solarRoute = router.route('/currentData');
 
 // Temperature API
 solarRoute.get(function(req, res){
