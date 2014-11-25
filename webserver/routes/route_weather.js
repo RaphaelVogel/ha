@@ -1,9 +1,10 @@
 var weather = require('../../access_modules/weather.js');
+var weather_db = require('../../access_modules/weather_db.js');
 var express = require('express');
 var router = express.Router();
 
 var weatherRoute = router.route('/currentData');
-var historicRoute = router.route('/historicData');
+var historicTempRoute = router.route('/historicTemperatures');
 
 weatherRoute.get(function(req, res){
     weather.readWeatherData(function(err, weatherData){
@@ -15,8 +16,14 @@ weatherRoute.get(function(req, res){
     });
 });
 
-historicRoute.get(function(req, res){
-	weather
+historicTempRoute.get(function(req, res){
+	weather_db.readTemperatureValues(1, function(err, weatherData){
+		if(err){
+			res.status(500).send({ "ERROR" : err });
+			return;
+		}
+		res.status(200).send(weatherData);
+	});
 });
 
 module.exports = router;

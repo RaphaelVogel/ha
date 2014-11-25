@@ -11,8 +11,16 @@ sap.ui.controller("haui.area.Weather", {
 		sap.ui.getCore().getEventBus().publish("nav", "back");
 	},
 	
-	handleListItemPress: function(oEvent) {
-		sap.ui.getCore().getEventBus().publish("nav", "to", {id : "WeatherChart"});		
+	handleTempPress: function(oEvent) {
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : "WeatherTempChart"});		
+	},
+	
+	handleHumidityPress: function(oEvent) {
+	
+	},
+	
+	handlePressurePress: function(oEvent) {
+	
 	}
 
 });

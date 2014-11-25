@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mvc:View controllerName="haui.area.WeatherChart" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit" xmlns:l="sap.ui.layout">
-	<Page id="weatherChartPage"
-		title="Wetter Daten"
+<mvc:View controllerName="haui.area.WeatherTempChart" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit" xmlns:l="sap.ui.layout">
+	<Page id="tempChartPage"
+		title="Temperatur Daten"
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
 		
