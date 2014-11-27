@@ -3,3 +3,4 @@ node_modules/
 ha.db
 webserver/ui5lib
 npm-debug.log
+.idea/
