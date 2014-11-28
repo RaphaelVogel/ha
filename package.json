@@ -11,6 +11,7 @@
     "express": "^4.9.7",
     "request": "^2.47.0",
     "sqlite3": "^3.0.2",
-    "tinkerforge": "^2.0.2"
+    "tinkerforge": "^2.0.2",
+    "winston": "^0.8.3"
   }
 }

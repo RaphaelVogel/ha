@@ -1,3 +1,4 @@
+var logger = require('../support/logger');
 var request = require('request');
 
 var solarData = {
@@ -29,9 +30,11 @@ exports.readData = function(cb){
         }
     }, function(err, response, body){
             if(err){
+                logger.verbose("Solar inverter could not be reached.");
                 cb("Could not read data from solar inverter: "+err);
                 return;
             }
+            logger.verbose("Response from solar inverter: "+body);
             /* example body
             master;5.47 kW;5.47 kVA;0.00 kvar;7.05 kWh;7.05 kVAh;0.00 kvarh;34.54 kWh;34.54 kVAh;0.00 kvarh;10.10 MWh;10.10 MVAh;0.00 Mvarh;31.10 MWh;31.10 MVAh;0.00 Mvarh;
             1;AT 5000;2.91 kW;4.1 kWh;16.44 MWh;0055A1701029;268435492;3;00100401;0
@@ -53,6 +56,7 @@ exports.readData = function(cb){
             var totalData = arr[13].split(" ");
             solarData.total = totalData[0];
             solarData.totalUnit = totalData[1];
+            logger.verbose("JSON created from solar inverter response: "+solarData);
             cb(null, solarData);
         }
     );

@@ -1,3 +1,4 @@
+var logger = require('../support/logger');
 var async = require('async');
 var TF = require('tinkerforge');
 var HOST = 'zentrale1';
@@ -22,6 +23,7 @@ exports.readWeatherData = function(callback){
 	var barometerBricklet = new TF.BrickletBarometer('', ipcon);
     
     ipcon.connect(HOST, PORT, function(error) {
+    	logger.error("Could not open connection to Tinkerforge: "+error);
         callback("Could not open connection to Tinkerforge: "+error);        
     });
 
@@ -32,6 +34,7 @@ exports.readWeatherData = function(callback){
 			weatherData.humidity = results[1];
 			weatherData.pressure = results[2];
 			if(!results[0] && !results[1] && !results[2]){
+				logger.error("Could not read any weather data at all from TF");
 				callback("Could not read any weather data");
 			}
 			else{
@@ -46,6 +49,7 @@ exports.readWeatherData = function(callback){
 				cb(null, temp/100);
 			},
 			function(error) {
+				logger.error("Could not read temperature value from TF: "+error);
 				// do not return error since then other functions are not called anymore
 				cb(null, null);
 			}
@@ -58,6 +62,7 @@ exports.readWeatherData = function(callback){
 				cb(null, humidity/10);
 			},
 			function(error) {
+				logger.error("Could not read humidity value from TF: "+error);
 				cb(null, null);
 			}
 		);	
@@ -69,6 +74,7 @@ exports.readWeatherData = function(callback){
 				cb(null, pressure/1000);
 			},
 			function(error) {
+				logger.error("Could not read air pressure value from TF: "+error);
 				cb(null, null);
 			}
 		);
