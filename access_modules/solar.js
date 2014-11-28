@@ -30,7 +30,7 @@ exports.readData = function(cb){
         }
     }, function(err, response, body){
             if(err){
-                logger.verbose("Solar inverter could not be reached.");
+                logger.info("Solar inverter could not be reached.");
                 cb("Could not read data from solar inverter: "+err);
                 return;
             }
