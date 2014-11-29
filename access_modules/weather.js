@@ -1,7 +1,7 @@
 var logger = require('../support/logger');
 var async = require('async');
 var TF = require('tinkerforge');
-var HOST = 'zentrale1';
+var HOST = 'busmaster';
 var PORT = 4223;
 
 var weatherData = {
@@ -16,11 +16,11 @@ exports.readWeatherData = function(callback){
 		return;
 	}
     var ipcon = new TF.IPConnection();
-    var masterBrick = new TF.BrickMaster('6esCZX', ipcon);
-    var tempBricklet = new TF.BrickletTemperature('dCf', ipcon);
+    var masterBrick = new TF.BrickMaster('6rkQPB', ipcon);
+    var tempBricklet = new TF.BrickletTemperature('qnk', ipcon);
     tempBricklet.setI2CMode(TF.BrickletTemperature.I2C_MODE_SLOW); // to prevent outlier
-	var humidityBricklet = new TF.BrickletHumidity('', ipcon);
-	var barometerBricklet = new TF.BrickletBarometer('', ipcon);
+	var humidityBricklet = new TF.BrickletHumidity('nLC', ipcon);
+	var barometerBricklet = new TF.BrickletBarometer('k5g', ipcon);
     
     ipcon.connect(HOST, PORT, function(error) {
     	logger.error("Could not open connection to Tinkerforge: "+error);

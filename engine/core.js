@@ -28,7 +28,7 @@ function () { // Job has ended
 }, true);
 
 
-
+/*
 // Solar job
 var jobSolar = new CronJob('00 30 8 * * *', function(){
     logger.info("Start solar job");
@@ -46,7 +46,7 @@ function(){
     logger.info("Solar job has ended");
     db.close();
 }, true);
-
+*/
 
 
 process.on('SIGINT', function() {

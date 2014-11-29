@@ -1,6 +1,6 @@
 var logger = require('../support/logger');
 var TF = require('tinkerforge');
-var HOST = 'zentrale1';
+var HOST = 'busmaster';
 var PORT = 4223;
 
 var zisterneData = {
