@@ -18,7 +18,7 @@ var jobWeather = new CronJob('00 */15 * * * *', function(){ // job starts
             logger.info("Insert the following weather data into DB: "+weatherData);
             db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,1,?)', [ weatherData.temperature ]);
 			db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.humidity ]);
-			db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.pressure ]);
+			db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,3,?)', [ weatherData.pressure ]);
         }
     });
 }, 
@@ -28,7 +28,7 @@ function () { // Job has ended
 }, true);
 
 
-/*
+
 // Solar job
 var jobSolar = new CronJob('00 30 8 * * *', function(){
     logger.info("Start solar job");
@@ -38,7 +38,7 @@ var jobSolar = new CronJob('00 30 8 * * *', function(){
             return;
         } else{
             logger.info("Insert the following solar data into DB: "+solarData);
-            db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (2,1,?)', [ solarData.day ]);
+            db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (2,1,?)', [ solarData.month ]);
         }        
     })
 },
@@ -46,7 +46,7 @@ function(){
     logger.info("Solar job has ended");
     db.close();
 }, true);
-*/
+
 
 
 process.on('SIGINT', function() {
