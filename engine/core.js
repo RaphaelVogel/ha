@@ -8,7 +8,7 @@ var db = new sqlite3.Database('../ha.db');
 
 
 // Weather job
-var jobWeather = new CronJob('00 */15 * * * *', function(){ // job starts
+var jobWeather = new CronJob('00 */30 * * * *', function(){ // job starts
     logger.info("Start weather job");
     weather.readWeatherData(function(err, weatherData){
         if(err){
