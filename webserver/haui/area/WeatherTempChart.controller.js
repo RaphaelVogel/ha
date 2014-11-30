@@ -3,6 +3,7 @@ sap.ui.controller("haui.area.WeatherTempChart", {
         var tempChartModel = new sap.ui.model.json.JSONModel();
         this.getView().byId("temperatureChart").setModel(tempChartModel);
         this.getView().addEventDelegate({
+            // call every time when page is displayed
             onBeforeShow: function(evt) {
                 this.refreshTempData(); 
             }

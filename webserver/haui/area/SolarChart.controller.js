@@ -3,6 +3,7 @@ sap.ui.controller("haui.area.SolarChart", {
         var solarChartModel = new sap.ui.model.json.JSONModel();
         this.getView().byId("solarChart").setModel(solarChartModel);
         this.getView().addEventDelegate({
+            // call every time when page is displayed
             onBeforeShow: function(evt) {
                 this.refreshSolarData(); 
             }

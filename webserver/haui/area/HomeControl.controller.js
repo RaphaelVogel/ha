@@ -3,6 +3,7 @@ sap.ui.controller("haui.area.HomeControl", {
         var zwaveModel = new sap.ui.model.json.JSONModel();
         sap.ui.getCore().setModel(zwaveModel, "zwaveModel");
         this.getView().addEventDelegate({
+            // call every time when page is displayed
             onBeforeShow: function(evt) {
                 this.refreshZWaveState(); 
             }

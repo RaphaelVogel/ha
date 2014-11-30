@@ -4,7 +4,7 @@ sap.ui.controller("haui.area.Solar", {
 	
 	handleRefreshPress: function(oEvent){
 		var solarModel = sap.ui.getCore().getModel("solarModel");
-		solarModel.loadData("/solar/data");
+		solarModel.loadData("/solar/currentData");
 	},
 	
 	handleChartDisplay: function(oEvent){
