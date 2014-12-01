@@ -5,33 +5,46 @@ sap.ui.controller("haui.Main", {
 		oBus.subscribe("nav", "to", this.navToHandler, this);
 		oBus.subscribe("nav", "back", this.navBackHandler, this);
 
-		// load weather and solar model for tiles
+		// load weather model for tile
+		var weatherTile = this.getView().byId("Weather");
 		var weatherModel = new sap.ui.model.json.JSONModel();
 		weatherModel.loadData("/weather/currentData");
 		sap.ui.getCore().setModel(weatherModel, "weatherModel");
-        var weatherTile = this.getView().byId("Weather");
         weatherModel.attachRequestCompleted(function(){
             weatherTile.setInfo("Status: OK");
             weatherTile.setInfoState("Success");
         });
         weatherModel.attachRequestFailed(function(){
-			weatherTile.setNumber("-");
-			weatherTile.setNumberUnit("Grad");
-            weatherTile.setInfo("Keine Verbindung");
+			var weatherModel = sap.ui.getCore().getModel("weatherModel");
+			var weatherData = {
+				"temperature" : "-", "temperatureUnit": "",
+				"humidity" : "-", "humidityUnit" : "",
+				"pressure" : "-", "pressureUnit" : ""
+			};
+			weatherModel.setData(weatherData);
+			weatherTile.setInfo("Keine Verbindung");
             weatherTile.setInfoState("Error");
         });        
 		
+		// load solar model for tile
+		var solarTile = this.getView().byId("Solar");
         var solarModel = new sap.ui.model.json.JSONModel();
 		solarModel.loadData("/solar/currentData");
 		sap.ui.getCore().setModel(solarModel, "solarModel");
-        var solarTile = this.getView().byId("Solar");
         solarModel.attachRequestCompleted(function(){
             solarTile.setInfo("Status: OK");
             solarTile.setInfoState("Success");
         });
         solarModel.attachRequestFailed(function(){
-			solarTile.setNumber("-");
-			solarTile.setNumberUnit("kW");
+			var solarModel = sap.ui.getCore().getModel("solarModel");
+			var solarData = {
+				"current": "-", "currentUnit": "",
+				"day": "-", "dayUnit": "",
+				"month": "-", "monthUnit": "",
+				"year": "-", "yearUnit": "",
+				"total": "-", "totalUnit": ""
+			};
+			solarModel.setData(solarData);
             solarTile.setInfo("Nicht in Betrieb");
             solarTile.setInfoState("Error");
         });
