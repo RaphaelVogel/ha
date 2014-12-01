@@ -1,4 +1,4 @@
-sap.ui.controller("haui.area.WeatherTempChart", {
+sap.ui.controller("haui.area.weather.WeatherTempChart", {
     onInit: function() {
         var tempChartModel = new sap.ui.model.json.JSONModel();
         this.getView().byId("temperatureChart").setModel(tempChartModel);

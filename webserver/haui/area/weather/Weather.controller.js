@@ -1,4 +1,4 @@
-sap.ui.controller("haui.area.Weather", {
+sap.ui.controller("haui.area.weather.Weather", {
 	onInit: function() {
 	},
 	
@@ -16,11 +16,11 @@ sap.ui.controller("haui.area.Weather", {
 	},
 	
 	handleHumidityPress: function(oEvent) {
-	
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : "WeatherHumidityChart"});
 	},
 	
 	handlePressurePress: function(oEvent) {
-	
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : "WeatherPressureChart"});
 	}
 
 });

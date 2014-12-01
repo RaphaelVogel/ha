@@ -8,13 +8,36 @@ var pressureData = {"pressureValues": []};
 
 exports.readTemperatureValues = function(range, callback){
 	if(!range) range =  1 //month
-	var sqlString = "select timestamp, val_real from sensordata where device_id = 1 and sensor_id = 1 and datetime(timestamp, '+"+range+" months') >= date('now') order by timestamp asc"; //
-	logger.verbose("Executed SQL statement to read weather data: "+sqlString);
+	var sqlString = "select timestamp, val_real from sensordata where device_id = 1 and sensor_id = 1 and datetime(timestamp, '+"+range+" months') >= date('now') order by timestamp asc";
+	logger.verbose("Executed SQL statement to read temperature data: "+sqlString);
 	db.each(sqlString, function(err, row){
 		tempData.tempValues.push({"temperature": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
 		callback(null, tempData);
 	});
-	
+}
+
+exports.readHumidityValues = function(range, callback){
+	if(!range) range =  1 //month
+	var sqlString = "select timestamp, val_real from sensordata where device_id = 1 and sensor_id = 2 and datetime(timestamp, '+"+range+" months') >= date('now') order by timestamp asc";
+	logger.verbose("Executed SQL statement to read humidity data: "+sqlString);
+	db.each(sqlString, function(err, row){
+		humidityData.humidityValues.push({"humidity": row.val_real, "timestamp": row.timestamp});
+	}, 
+	function(){
+		callback(null, humidityData);
+	});	
+}
+
+exports.readPressureValues = function(range, callback){
+	if(!range) range =  1 //month
+	var sqlString = "select timestamp, val_real from sensordata where device_id = 1 and sensor_id = 3 and datetime(timestamp, '+"+range+" months') >= date('now') order by timestamp asc";
+	logger.verbose("Executed SQL statement to read pressure data: "+sqlString);
+	db.each(sqlString, function(err, row){
+		pressureData.pressureValues.push({"pressure": row.val_real, "timestamp": row.timestamp});
+	}, 
+	function(){
+		callback(null, pressureData);
+	});	
 }

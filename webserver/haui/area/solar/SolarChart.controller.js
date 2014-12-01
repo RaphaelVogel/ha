@@ -1,4 +1,4 @@
-sap.ui.controller("haui.area.SolarChart", {
+sap.ui.controller("haui.area.solar.SolarChart", {
     onInit: function() {
         var solarChartModel = new sap.ui.model.json.JSONModel();
         this.getView().byId("solarChart").setModel(solarChartModel);

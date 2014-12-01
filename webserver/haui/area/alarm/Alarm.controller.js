@@ -1,4 +1,4 @@
-sap.ui.controller("haui.area.Alarm", {
+sap.ui.controller("haui.area.alarm.Alarm", {
 	onInit: function() {
 	},
     

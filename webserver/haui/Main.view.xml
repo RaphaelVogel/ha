@@ -2,11 +2,13 @@
 <core:View controllerName="haui.Main" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<App id="haapp">
 		<mvc:XMLView viewName="haui.Overview" id="Overview" />
-		<mvc:XMLView viewName="haui.area.Weather" id="Weather" />
-		<mvc:XMLView viewName="haui.area.WeatherTempChart" id="WeatherTempChart" />
-        <mvc:XMLView viewName="haui.area.HomeControl" id="HomeControl" />
-        <mvc:XMLView viewName="haui.area.Solar" id="Solar" />
-        <mvc:XMLView viewName="haui.area.SolarChart" id="SolarChart" />
-		<mvc:XMLView viewName="haui.area.Alarm" id="Alarm" />
+		<mvc:XMLView viewName="haui.area..weather.Weather" id="Weather" />
+		<mvc:XMLView viewName="haui.area.weather.WeatherTempChart" id="WeatherTempChart" />
+		<mvc:XMLView viewName="haui.area.weather.WeatherHumidityChart" id="WeatherHumidityChart" />
+		<mvc:XMLView viewName="haui.area.weather.WeatherPressureChart" id="WeatherPressureChart" />
+        <mvc:XMLView viewName="haui.area.home.HomeControl" id="HomeControl" />
+        <mvc:XMLView viewName="haui.area.solar.Solar" id="Solar" />
+        <mvc:XMLView viewName="haui.area.solar.SolarChart" id="SolarChart" />
+		<mvc:XMLView viewName="haui.area.alarm.Alarm" id="Alarm" />
 	</App>
 </core:View>

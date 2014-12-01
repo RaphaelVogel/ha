@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mvc:View controllerName="haui.area.HomeControl" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+<mvc:View controllerName="haui.area.home.HomeControl" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<Page id="HomeControlPage"
 		title="Haussteuerung"
 		showNavButton="true"

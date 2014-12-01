@@ -1,4 +1,4 @@
-sap.ui.controller("haui.area.HomeControl", {    
+sap.ui.controller("haui.area.home.HomeControl", {    
     onInit: function() {
         var zwaveModel = new sap.ui.model.json.JSONModel();
         sap.ui.getCore().setModel(zwaveModel, "zwaveModel");

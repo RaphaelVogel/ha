@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mvc:View controllerName="haui.area.Weather" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit" xmlns:l="sap.ui.layout">
+<mvc:View controllerName="haui.area.weather.Weather" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:ma="sap.makit" xmlns:l="sap.ui.layout">
 	<Page id="weatherPage"
 		title="Wetter Daten"
 		showNavButton="true"

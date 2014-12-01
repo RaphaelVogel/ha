@@ -5,6 +5,8 @@ var router = express.Router();
 
 var weatherRoute = router.route('/currentData');
 var historicTempRoute = router.route('/historicTemperatures');
+var historicHumidityRoute = router.route('/historicHumidities');
+var historicPressureRoute = router.route('/historicPressures');
 
 weatherRoute.get(function(req, res){
     weather.readWeatherData(function(err, weatherData){
@@ -18,6 +20,26 @@ weatherRoute.get(function(req, res){
 
 historicTempRoute.get(function(req, res){
 	weather_db.readTemperatureValues(1, function(err, weatherData){
+		if(err){
+			res.status(500).send({ "ERROR" : err });
+			return;
+		}
+		res.status(200).send(weatherData);
+	});
+});
+
+historicHumidityRoute.get(function(req, res){
+	weather_db.readHumidityValues(1, function(err, weatherData){
+		if(err){
+			res.status(500).send({ "ERROR" : err });
+			return;
+		}
+		res.status(200).send(weatherData);
+	});
+});
+
+historicPressureRoute.get(function(req, res){
+	weather_db.readPressureValues(1, function(err, weatherData){
 		if(err){
 			res.status(500).send({ "ERROR" : err });
 			return;
