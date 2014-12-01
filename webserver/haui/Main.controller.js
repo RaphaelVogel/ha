@@ -9,7 +9,12 @@ sap.ui.controller("haui.Main", {
 	navToHandler : function(channelId, eventId, data) {
 		var mainView = this.getView();
 		var haApp = mainView.byId("haapp");
-		haApp.to(mainView.byId(data.id));
+		var page = haApp.getPage(data.id)
+		if(!page){
+			page = sap.ui.xmlview(data.id, data.viewname);
+			haApp.addPage(page);
+		}
+		haApp.to(page);
 	},
 
 	navBackHandler : function(channelId, eventId, data) {

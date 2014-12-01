@@ -8,7 +8,7 @@ sap.ui.controller("haui.area.solar.Solar", {
 	},
 	
 	handleChartDisplay: function(oEvent){
-		sap.ui.getCore().getEventBus().publish("nav", "to", {id : "SolarChart"});
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : "SolarChart", viewname: 'haui.area.solar.SolarChart'});
 	},
 
 	handleNavButtonPress: function(oEvent) {

@@ -12,7 +12,7 @@
                 title="Temperatur Luftdruck und Luftfeutigkeit"
                 number="{weatherModel>/temperature}"
                 numberUnit="{weatherModel>/temperatureUnit}"
-                press="handleTilePress"/>
+                press="handleWeatherPress"/>
             <StandardTile
                 id="HomeControl"
                 icon="sap-icon://action-settings"
@@ -20,14 +20,14 @@
 				type="Monitor"
                 info="Status: Ok"
                 infoState="Success"
-                press="handleTilePress"/>
+                press="handleHomeControlPress"/>
 			<StandardTile
                 id="Solar"
                 icon="sap-icon://home"
                 title="Solaranalge"
                 number="{solarModel>/current}"
                 numberUnit="{solarModel>/currentUnit}"
-                press="handleTilePress"/>
+                press="handleSolarPress"/>
             <StandardTile
                 id="Alarm"
                 icon="sap-icon://alert"
@@ -35,7 +35,7 @@
 				type="Monitor"
                 info="Status: OK"
                 infoState="Success"
-                press="handleTilePress"/>				
+                press="handleAlarmPress"/>				
 		</TileContainer>
 	</Page>
 </mvc:View>

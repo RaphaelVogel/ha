@@ -38,9 +38,19 @@ sap.ui.controller("haui.Overview", {
 		solarModel.loadData("/solar/currentData");
 	},
 	
-	handleTilePress: function(oEvent) {
-		var tileId = oEvent.getSource().getId().substring("Mainview--Overview--".length);
-		sap.ui.getCore().getEventBus().publish("nav", "to", {id : tileId});
+	handleWeatherPress: function(oEvent) {
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : 'Weather', viewname: 'haui.area.weather.Weather'});
 	},
 	
+	handleHomeControlPress: function(oEvent) {
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : 'HomeControl', viewname: 'haui.area.home.HomeControl'});
+	},
+
+	handleSolarPress: function(oEvent) {
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : 'Solar', viewname: 'haui.area.solar.Solar'});
+	},
+
+	handleAlarmPress: function(oEvent) {
+		sap.ui.getCore().getEventBus().publish("nav", "to", {id : 'Alarm', viewname: 'haui.area.alarm.Alarm'});
+	},			
 });
