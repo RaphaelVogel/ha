@@ -4,3 +4,4 @@ ha.db
 webserver/ui5lib
 npm-debug.log
 .idea/
+*.log

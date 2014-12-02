@@ -14,6 +14,7 @@ exports.readTemperatureValues = function(range, callback){
 		tempData.tempValues.push({"temperature": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
+        db.close();
 		callback(null, tempData);
 	});
 }
@@ -26,6 +27,7 @@ exports.readHumidityValues = function(range, callback){
 		humidityData.humidityValues.push({"humidity": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
+        db.close();
 		callback(null, humidityData);
 	});	
 }
@@ -38,6 +40,7 @@ exports.readPressureValues = function(range, callback){
 		pressureData.pressureValues.push({"pressure": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
+        db.close();
 		callback(null, pressureData);
 	});	
 }

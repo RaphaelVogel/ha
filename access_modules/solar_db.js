@@ -12,6 +12,7 @@ exports.readProductionPerDay = function(range, callback){
 		solarData.days.push({"dayproduction": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
+        db.close();
 		callback(null, solarData);
 	});
 	
