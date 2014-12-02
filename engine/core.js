@@ -4,12 +4,12 @@ var async = require('async');
 var weather = require('../access_modules/weather');
 var solar = require('../access_modules/solar');
 var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('../ha.db');
 
 
 // Weather job
 var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
     logger.info("Start weather job");
+    var db = new sqlite3.Database('../ha.db');
     weather.readWeatherData(function(err, weatherData){
         if(err){
             logger.error("Job could not read weather data from TF");
@@ -32,6 +32,7 @@ function () { // Job has ended
 // Solar job
 var jobSolar = new CronJob('00 30 8 * * *', function(){
     logger.info("Start solar job");
+    var db = new sqlite3.Database('../ha.db');
     solar.readData(function(err, solarData){
         if(err){
             logger.error("Job could not read solar data");
