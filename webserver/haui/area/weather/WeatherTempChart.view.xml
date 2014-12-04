@@ -16,7 +16,7 @@
 			</ma:values>
 			<ma:columns>
 				<ma:Column name="temperature" value="{temperature}" type="number" />
-				<ma:Column name="measurementdate" value="{path: 'timestamp', formatter: 'haui.Util.dateFormatter'}" />
+				<ma:Column name="measurementdate" value="{timestamp}" />
 			</ma:columns>
 		</ma:Chart>
 	

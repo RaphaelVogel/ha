@@ -19,7 +19,10 @@ weatherRoute.get(function(req, res){
 });
 
 historicTempRoute.get(function(req, res){
-	weather_db.readTemperatureValues(1, function(err, weatherData){
+	var year = req.query.year;
+    var month = req.query.month;
+    var day = req.query.day;
+    weather_db.readTemperatureValues(year, month, day, function(err, weatherData){
 		if(err){
 			res.status(500).send({ "ERROR" : err });
 			return;
