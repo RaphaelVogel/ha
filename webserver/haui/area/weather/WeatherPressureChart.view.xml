@@ -12,8 +12,9 @@
 				<ma:Category column="measurementdate" displayName="Datum und Zeit" />
 			</ma:category>
 			<ma:values>
-				<ma:Value expression="pressure" displayName="Luftdruck mbar" />
+                <ma:Value expression="pressure" displayName="Luftdruck mbar" />
 			</ma:values>
+            
 			<ma:columns>
 				<ma:Column name="pressure" value="{pressure}" type="number" />
 				<ma:Column name="measurementdate" value="{path: 'timestamp', formatter: 'haui.Util.dateFormatter'}" />
