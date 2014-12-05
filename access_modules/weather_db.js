@@ -2,7 +2,7 @@ var logger = require('../support/logger');
 var sqlite3 = require('sqlite3');
 
 exports.readTemperatureValues = function(year, month, day, callback){
-    var tempData = {"tempValues": []};
+    var tempData = {"weatherValues": []};
 	var sqlString;
     if(!year){
         // return average per year
@@ -18,8 +18,8 @@ exports.readTemperatureValues = function(year, month, day, callback){
     }
     if(year && month && !day){
         // return temp vales for specific year/month average per day
-        sqlString = "select strftime('%d.%m %Y',timestamp) as time, avg(val_real) as temp from sensordata "+
-                    "where device_id = 1 and sensor_id = 1 and strftime('%Y',timestamp) = '"+year+"' and strftime('%m',timestamp) = '"+month+"' group by strftime('%d.%m %Y',timestamp)";
+        sqlString = "select strftime('%d.%m. %Y',timestamp) as time, avg(val_real) as temp from sensordata "+
+                    "where device_id = 1 and sensor_id = 1 and strftime('%Y',timestamp) = '"+year+"' and strftime('%m',timestamp) = '"+month+"' group by strftime('%d.%m. %Y',timestamp)";
         logger.verbose("Executed SQL statement to read average temperature by day: \n"+sqlString);
     }
     if(year && month && day){
@@ -31,7 +31,7 @@ exports.readTemperatureValues = function(year, month, day, callback){
     
 	var db = new sqlite3.Database('../ha.db');
     db.each(sqlString, function(err, row){
-		tempData.tempValues.push({"temperature": row.temp, "timestamp": row.time});
+		tempData.weatherValues.push({"value": row.temp, "time": row.time});
 	}, 
 	function(){
         db.close();
@@ -40,13 +40,13 @@ exports.readTemperatureValues = function(year, month, day, callback){
 }
 
 exports.readHumidityValues = function(range, callback){
-    var humidityData = {"humidityValues": []};
+    var humidityData = {"weatherValues": []};
 	if(!range) range =  1 //month
 	var sqlString = "select timestamp, val_real from sensordata where device_id = 1 and sensor_id = 2 and datetime(timestamp, '+"+range+" months') >= date('now') order by timestamp asc";
 	logger.verbose("Executed SQL statement to read humidity data: "+sqlString);
 	var db = new sqlite3.Database('../ha.db');
     db.each(sqlString, function(err, row){
-		humidityData.humidityValues.push({"humidity": row.val_real, "timestamp": row.timestamp});
+		humidityData.weatherValues.push({"humidity": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
         db.close();
@@ -55,13 +55,13 @@ exports.readHumidityValues = function(range, callback){
 }
 
 exports.readPressureValues = function(range, callback){
-    var pressureData = {"pressureValues": []};
+    var pressureData = {"weatherValues": []};
 	if(!range) range =  1 //month
 	var sqlString = "select timestamp, val_real from sensordata where device_id = 1 and sensor_id = 3 and datetime(timestamp, '+"+range+" months') >= date('now') order by timestamp asc";
 	logger.verbose("Executed SQL statement to read pressure data: "+sqlString);
 	var db = new sqlite3.Database('../ha.db');
     db.each(sqlString, function(err, row){
-		pressureData.pressureValues.push({"pressure": row.val_real, "timestamp": row.timestamp});
+		pressureData.weatherValues.push({"pressure": row.val_real, "timestamp": row.timestamp});
 	}, 
 	function(){
         db.close();

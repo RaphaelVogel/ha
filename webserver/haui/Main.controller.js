@@ -58,7 +58,12 @@ sap.ui.controller("haui.Main", {
 			page = sap.ui.xmlview(data.id, data.viewname);
 			haApp.addPage(page);
 		}
-		haApp.to(page);
+		if (data.customData){
+			haApp.to(page, {"customData":data.customData});
+		} else{
+			haApp.to(page);
+		}
+		
 	},
 
 	navBackHandler : function(channelId, eventId, data) {
