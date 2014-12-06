@@ -12,7 +12,7 @@
 		
 		<ma:Chart id="weatherChart" height="85%" width="100%" type="Line"
 			rows="{/weatherValues}" showRangeSelector="true" showTableView="false"
-			showTotalValue="false" tap="chartPressed" >
+			showTotalValue="false" doubletap="chartPressed" >
 			<ma:category>
 				<ma:Category column="time" displayName="Zeitraum" />
 			</ma:category>

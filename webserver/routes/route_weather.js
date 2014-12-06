@@ -32,7 +32,10 @@ historicTempRoute.get(function(req, res){
 });
 
 historicHumidityRoute.get(function(req, res){
-	weather_db.readHumidityValues(1, function(err, weatherData){
+    var year = req.query.year;
+    var month = req.query.month;
+    var day = req.query.day;
+	weather_db.readHumidityValues(year, month, day, function(err, weatherData){
 		if(err){
 			res.status(500).send({ "ERROR" : err });
 			return;
@@ -42,7 +45,10 @@ historicHumidityRoute.get(function(req, res){
 });
 
 historicPressureRoute.get(function(req, res){
-	weather_db.readPressureValues(1, function(err, weatherData){
+	var year = req.query.year;
+    var month = req.query.month;
+    var day = req.query.day;    
+	weather_db.readPressureValues(year, month, day, function(err, weatherData){
 		if(err){
 			res.status(500).send({ "ERROR" : err });
 			return;
