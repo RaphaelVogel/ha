@@ -3,7 +3,7 @@
 	<Page id="weatherChartPage"
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
-		<SegmentedButton selectedButton="monthButton">
+		<SegmentedButton id="segmentedChartButton">
 			<Button id="allButton" text="Alle Jahre" press="handleAllPress" />
 			<Button id="yearButton" press="handleYearPress" />
 			<Button id="monthButton" press="handleMonthPress" />

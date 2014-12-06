@@ -21,21 +21,24 @@
             // call every time when page is displayed
             onBeforeShow: function(evt) {
                 this.displayData = evt.data.customData;
+                this.getView().byId("segmentedChartButton").setSelectedButton(this.getView().byId("monthButton"));
+                var weatherChart = this.getView().byId("weatherChart");
+                weatherChart.setType("Line");
                 var weatherChartModel = this.getView().byId("weatherChart").getModel();
 				if(this.isTemperatureChart()){
 					this.getView().byId("weatherChartPage").setTitle("Temperatur");
-					this.getView().byId("weatherChart").getValues()[0].setDisplayName("Temperatur C°");
+					weatherChart.getValues()[0].setDisplayName("Temperatur C°");
 					weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month);
 				}
 				else if(this.isHumidityChart()){
 					this.getView().byId("weatherChartPage").setTitle("Luftfeuchtigkeit");
-					this.getView().byId("weatherChart").getValues()[0].setDisplayName("Luftfeuchtigkeit %RH");
+					weatherChart.getValues()[0].setDisplayName("Luftfeuchtigkeit %RH");
 					weatherChartModel.loadData("/weather/historicHumidities?year="+this.year+"&month="+this.month);				
 				}
 				else if(this.isPressureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftdruck");
-                    this.getView().byId("weatherChart").getValues()[0].setDisplayName("Luftdruck mBar");
-                    this.getView().byId("weatherChart").setValueAxis(new sap.makit.ValueAxis({min : 930, max: 1100})); 
+                    weatherChart.getValues()[0].setDisplayName("Luftdruck mBar");
+                    weatherChart.setValueAxis(new sap.makit.ValueAxis({min : 930, max: 1100})); 
                     weatherChartModel.loadData("/weather/historicPressures?year="+this.year+"&month="+this.month);				
 				}
             }
