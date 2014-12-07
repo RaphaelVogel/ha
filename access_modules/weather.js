@@ -59,6 +59,12 @@ exports.readWeatherData = function(callback){
 	function readHumidity(cb){
 		humidityBricklet.getHumidity(
 			function(humidity) {
+                if((humidity/10) < 5){
+                    // outlier, ignore
+                    logger.warn("Read humidity which is out of range (< 5 %RH): "+error);
+                    cb(null, null);
+                    return;
+                }
 				cb(null, humidity/10);
 			},
 			function(error) {
@@ -71,6 +77,12 @@ exports.readWeatherData = function(callback){
 	function readPressure(cb){
 		barometerBricklet.getAirPressure(
 			function(pressure) {
+                if((pressure/1000) < 930 || (pressure/1000) > 1100){
+                    // outlier, ignore
+                    logger.warn("Read air pressure which is out of range (< 930 mBar or > 1100 mBar): "+error);
+                    cb(null, null);
+                    return;
+                }
 				cb(null, pressure/1000);
 			},
 			function(error) {
