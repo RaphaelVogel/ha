@@ -26,22 +26,23 @@
                 weatherChart.setType("Line");
                 var weatherChartModel = this.getView().byId("weatherChart").getModel();
 				if(this.isTemperatureChart()){
-					this.getView().byId("weatherChartPage").setTitle("Temperatur im "+haui.Util.numberToMonth(this.month.toString()));
-					weatherChart.getValues()[0].setDisplayName("Temperatur C°");
-					weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month);
-				}
-				else if(this.isHumidityChart()){
-					this.getView().byId("weatherChartPage").setTitle("Luftfeuchtigkeit im "+haui.Util.numberToMonth(this.month.toString()));
-					weatherChart.getValues()[0].setDisplayName("Luftfeuchtigkeit %RH");
-                    weatherChart.setValueAxis(new sap.makit.ValueAxis({min : 0, max: 100}));
-					weatherChartModel.loadData("/weather/historicHumidities?year="+this.year+"&month="+this.month);				
-				}
-				else if(this.isPressureChart()){
+                    this.getView().byId("weatherChartPage").setTitle("Temperatur im "+haui.Util.numberToMonth(this.month.toString()));
+                    weatherChart.getValues()[0].setDisplayName("Temperatur C°");
+                    weatherChart.getValueAxis().setMin("-20").setMax("40");
+                    weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month);
+                }
+                else if(this.isHumidityChart()){
+                    this.getView().byId("weatherChartPage").setTitle("Luftfeuchtigkeit im "+haui.Util.numberToMonth(this.month.toString()));
+                    weatherChart.getValues()[0].setDisplayName("Luftfeuchtigkeit %RH");
+                    weatherChart.getValueAxis().setMin("0").setMax("100");
+                    weatherChartModel.loadData("/weather/historicHumidities?year="+this.year+"&month="+this.month);				
+                }
+                else if(this.isPressureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftdruck im "+haui.Util.numberToMonth(this.month.toString()));
                     weatherChart.getValues()[0].setDisplayName("Luftdruck mBar");
-                    weatherChart.setValueAxis(new sap.makit.ValueAxis({min : 930, max: 1100})); 
+                    weatherChart.getValueAxis().setMin("940").setMax("1060");
                     weatherChartModel.loadData("/weather/historicPressures?year="+this.year+"&month="+this.month);				
-				}
+                }
             }
         }, this);
 	},
@@ -184,5 +185,18 @@
     
 	handleNavButtonPress: function(oEvent) {
 		sap.ui.getCore().getEventBus().publish("nav", "back");
-	}
+	},
+    
+    getMinMaxForTemperature: function(values){
+        var min=0; max=0;
+        values.forEach(function(obj){
+            if(obj.value > max){
+                max = obj.value;
+            }
+            if(obj.value < min){
+                min = obj.value;
+            }
+        });
+        return {"min":min, "max":max};
+    }
 });

@@ -77,9 +77,9 @@ exports.readWeatherData = function(callback){
 	function readPressure(cb){
 		barometerBricklet.getAirPressure(
 			function(pressure) {
-                if((pressure/1000) < 930 || (pressure/1000) > 1100){
+                if((pressure/1000) < 930 || (pressure/1000) > 1080){
                     // outlier, ignore
-                    logger.warn("Read air pressure which is out of range (< 930 mBar or > 1100 mBar): "+error);
+                    logger.warn("Read air pressure which is out of range (< 930 mBar or > 1070 mBar): "+error);
                     cb(null, null);
                     return;
                 }
