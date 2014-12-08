@@ -11,17 +11,16 @@
 		if(this.month < 10){
 			this.month = "0"+this.month;
 		}		
-		this.getView().byId("allButton").setText("Alle Jahre");
-		this.getView().byId("yearButton").setText(this.year);
-		this.getView().byId("monthButton").setText(haui.Util.numberToMonth(this.month.toString()));
-		this.getView().byId("dayButton").setText("Heute");		
+		this.getView().byId("allSelected").setText("Alle Jahre");
+		this.getView().byId("yearSelected").setText(this.year);
+		this.getView().byId("monthSelected").setText(haui.Util.numberToMonth(this.month.toString()));
+		this.getView().byId("daySelected").setText("Heute");		
         var weatherChartModel = new sap.ui.model.json.JSONModel();
         this.getView().byId("weatherChart").setModel(weatherChartModel);
         this.getView().addEventDelegate({
             // call every time when page is displayed
             onBeforeShow: function(evt) {
                 this.displayData = evt.data.customData;
-                this.getView().byId("segmentedChartButton").setSelectedButton(this.getView().byId("monthButton"));
                 var weatherChart = this.getView().byId("weatherChart");
                 weatherChart.setType("Line");
                 var weatherChartModel = this.getView().byId("weatherChart").getModel();
@@ -45,6 +44,24 @@
                 }
             }
         }, this);
+	},
+	
+	handleSelectPress: function(){
+		var key = this.getView().byId("selectBox").getSelectedKey();
+		switch(key){
+		case "allSelected":
+			this.handleAllPress();
+			break;
+		case "yearSelected":
+			this.handleYearPress();
+			break;
+		case "monthSelected":
+			this.handleMonthPress();
+			break;
+		case "daySelected":
+			this.handleDayPress();
+			break;
+		}
 	},
 	
 	handleAllPress: function(){
@@ -124,14 +141,17 @@
 				// year selected e.g. 2014
 				if(this.isTemperatureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Temperatur "+category);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicTemperatures?year="+category);
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchte "+category);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicHumidities?year="+category);
                 }
                 else if(this.isPressureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftdruck "+category);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicPressures?year="+category);
                 }
 			}
@@ -140,14 +160,17 @@
 				var splitDate = category.split(' ');
                 if(this.isTemperatureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Temperatur "+haui.Util.numberToMonth(splitDate[0])+" "+splitDate[1]);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicTemperatures?year="+splitDate[1]+"&month="+splitDate[0]);
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchte "+haui.Util.numberToMonth(splitDate[0])+" "+splitDate[1]);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicHumidities?year="+splitDate[1]+"&month="+splitDate[0]);
                 }
                 else if(this.isPressureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftdruck "+haui.Util.numberToMonth(splitDate[0])+" "+splitDate[1]);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicPressures?year="+splitDate[1]+"&month="+splitDate[0]);
                 }				
 			}
@@ -157,14 +180,17 @@
                 var splitMonth = splitDate[0].split('.');
                 if(this.isTemperatureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Temperatur am "+splitMonth[0]+". "+haui.Util.numberToMonth(splitMonth[1])+" "+splitDate[1]);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicTemperatures?year="+splitDate[1]+"&month="+splitMonth[1]+"&day="+splitMonth[0]);
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchte am "+splitMonth[0]+". "+haui.Util.numberToMonth(splitMonth[1])+" "+splitDate[1]);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicHumidities?year="+splitDate[1]+"&month="+splitMonth[1]+"&day="+splitMonth[0]);
                 }
                 else if(this.isPressureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftdruck am "+splitMonth[0]+". "+haui.Util.numberToMonth(splitMonth[1])+" "+splitDate[1]);
+					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicPressures?year="+splitDate[1]+"&month="+splitMonth[1]+"&day="+splitMonth[0]);
                 }				
 			}
