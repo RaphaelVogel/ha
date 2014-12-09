@@ -5,7 +5,8 @@
 	displayData: "", //Weather--temperatureData, Weather--humidityData, Weather--pressureData
 	
 	onInit: function() {
-		if(this.day < 10){
+		var that = this;
+        if(this.day < 10){
 			this.day = "0"+this.day;
 		}
 		if(this.month < 10){
@@ -27,8 +28,7 @@
 				if(this.isTemperatureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Temperatur im "+haui.Util.numberToMonth(this.month.toString()));
                     weatherChart.getValues()[0].setDisplayName("Temperatur C°");
-                    weatherChart.getValueAxis().setMin("-20").setMax("40");
-                    weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month);
+                    weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month); 
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchtigkeit im "+haui.Util.numberToMonth(this.month.toString()));
@@ -44,6 +44,13 @@
                 }
             }
         }, this);
+        weatherChartModel.attachRequestCompleted(function(req){
+            if(req.getParameters().url.indexOf("historicTemperatures") > -1){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin((that.getView().byId("weatherChart").getModel().getProperty("/minrange")).toString())
+                .setMax((that.getView().byId("weatherChart").getModel().getProperty("/maxrange")).toString());
+            }
+        }); 
 	},
 	
 	handleSelectPress: function(){
@@ -70,6 +77,12 @@
 		if(this.isTemperatureChart()){
             this.getView().byId("weatherChartPage").setTitle("Temperatur aller Jahre");
             weatherChartModel.loadData("/weather/historicTemperatures");
+            var that = this;
+            weatherChartModel.attachRequestCompleted(function(){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+            });             
 		}
 		else if(this.isHumidityChart()){
             this.getView().byId("weatherChartPage").setTitle("Luftfeuchte aller Jahre");
@@ -87,6 +100,13 @@
 		if(this.isTemperatureChart()){
             this.getView().byId("weatherChartPage").setTitle("Temperatur "+this.year);
 			weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year);
+            var that = this;
+            weatherChartModel.attachRequestCompleted(function(){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+            });             
+            
 		}
 		else if(this.isHumidityChart()){
             this.getView().byId("weatherChartPage").setTitle("Luftfeuchte "+this.year);
@@ -104,6 +124,13 @@
 		if(this.isTemperatureChart()){
             this.getView().byId("weatherChartPage").setTitle("Temperatur "+haui.Util.numberToMonth(this.month.toString())+" "+this.year);
 			weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month);	
+            var that = this;
+            weatherChartModel.attachRequestCompleted(function(){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+            });             
+            
 		}
 		else if(this.isHumidityChart()){
             this.getView().byId("weatherChartPage").setTitle("Luftfeuchte "+haui.Util.numberToMonth(this.month.toString())+" "+this.year);
@@ -120,7 +147,14 @@
 		var weatherChartModel = this.getView().byId("weatherChart").getModel();
 		if(this.isTemperatureChart()){
             this.getView().byId("weatherChartPage").setTitle("Temperatur am "+this.day+". "+haui.Util.numberToMonth(this.month.toString())+" "+this.year);
-			weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month+"&day="+this.day);
+            weatherChartModel.loadData("/weather/historicTemperatures?year="+this.year+"&month="+this.month+"&day="+this.day);
+            var that = this;
+            weatherChartModel.attachRequestCompleted(function(){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+            });             
+
 		}
 		else if(this.isHumidityChart()){
             this.getView().byId("weatherChartPage").setTitle("Luftfeuchte am "+this.day+". "+haui.Util.numberToMonth(this.month.toString())+" "+this.year);
@@ -143,6 +177,12 @@
                     this.getView().byId("weatherChartPage").setTitle("Temperatur "+category);
 					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicTemperatures?year="+category);
+                    var that = this;
+                    weatherChartModel.attachRequestCompleted(function(){
+                        that.getView().byId("weatherChart").getValueAxis()
+                        .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                        .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+                    });
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchte "+category);
@@ -162,6 +202,12 @@
                     this.getView().byId("weatherChartPage").setTitle("Temperatur "+haui.Util.numberToMonth(splitDate[0])+" "+splitDate[1]);
 					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicTemperatures?year="+splitDate[1]+"&month="+splitDate[0]);
+                    var that = this;
+                    weatherChartModel.attachRequestCompleted(function(){
+                        that.getView().byId("weatherChart").getValueAxis()
+                        .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                        .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+                    });
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchte "+haui.Util.numberToMonth(splitDate[0])+" "+splitDate[1]);
@@ -182,6 +228,12 @@
                     this.getView().byId("weatherChartPage").setTitle("Temperatur am "+splitMonth[0]+". "+haui.Util.numberToMonth(splitMonth[1])+" "+splitDate[1]);
 					this.getView().byId("selectBox").setSelectedKey("nothingSelected");
                     weatherChartModel.loadData("/weather/historicTemperatures?year="+splitDate[1]+"&month="+splitMonth[1]+"&day="+splitMonth[0]);
+                    var that = this;
+                    weatherChartModel.attachRequestCompleted(function(){
+                        that.getView().byId("weatherChart").getValueAxis()
+                        .setMin(that.getView().byId("weatherChart").getModel().getProperty("/minrange"))
+                        .setMax(that.getView().byId("weatherChart").getModel().getProperty("/maxrange"));
+                    });                    
                 }
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchte am "+splitMonth[0]+". "+haui.Util.numberToMonth(splitMonth[1])+" "+splitDate[1]);

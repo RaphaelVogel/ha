@@ -27,6 +27,9 @@ historicTempRoute.get(function(req, res){
 			res.status(500).send({ "ERROR" : err });
 			return;
 		}
+        var minMax = getMinMax(weatherData.weatherValues);
+        weatherData.minrange = minMax.minrange;
+        weatherData.maxrange = minMax.maxrange;
 		res.status(200).send(weatherData);
 	});
 });
@@ -56,5 +59,20 @@ historicPressureRoute.get(function(req, res){
 		res.status(200).send(weatherData);
 	});
 });
+
+function getMinMax(values){
+    var min = 30; max = -20;
+    values.forEach(function(item){
+        if(item.value > max){
+            max = item.value;
+        }
+        if(item.value < min){
+            min = item.value;
+        }
+    });
+    min = Math.round(min) - 1;
+    max = Math.round(max) + 1;
+    return {"minrange": min, "maxrange": max};
+}
 
 module.exports = router;

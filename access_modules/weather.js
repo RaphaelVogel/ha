@@ -61,7 +61,7 @@ exports.readWeatherData = function(callback){
 			function(humidity) {
                 if((humidity/10) < 5){
                     // outlier, ignore
-                    logger.warn("Read humidity which is out of range (< 5 %RH): "+error);
+                    logger.warn("Read humidity which is out of range (< 5 %RH)");
                     cb(null, null);
                     return;
                 }
@@ -79,7 +79,7 @@ exports.readWeatherData = function(callback){
 			function(pressure) {
                 if((pressure/1000) < 930 || (pressure/1000) > 1080){
                     // outlier, ignore
-                    logger.warn("Read air pressure which is out of range (< 930 mBar or > 1070 mBar): "+error);
+                    logger.warn("Read air pressure which is out of range (< 930 mBar or > 1070 mBar)");
                     cb(null, null);
                     return;
                 }
