@@ -70,8 +70,8 @@ function getMinMax(values){
             min = item.value;
         }
     });
-    min = Math.round(min) - 1;
-    max = Math.round(max) + 1;
+    min = Math.round(min) - 2;
+    max = Math.round(max) + 2;
     return {"minrange": min, "maxrange": max};
 }
 
