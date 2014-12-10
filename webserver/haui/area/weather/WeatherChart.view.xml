@@ -4,7 +4,7 @@
 		showNavButton="true"
 		navButtonPress="handleNavButtonPress">
         <headerContent>
-		<Select id="selectBox" change="handleSelectPress">
+		<Select id="selectBox" change="handleSelectPress"> 
 			<core:Item id="allSelected" key="allSelected" text="Alle Jahre" />
 			<core:Item id="yearSelected" key="yearSelected" />
 			<core:Item id="monthSelected" key="monthSelected" />
