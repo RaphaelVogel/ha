@@ -24,6 +24,7 @@
                 this.displayData = evt.data.customData;
                 var weatherChart = this.getView().byId("weatherChart");
                 weatherChart.setType("Line");
+				this.getView().byId("selectBox").setSelectedKey("monthSelected");
                 var weatherChartModel = this.getView().byId("weatherChart").getModel();
 				if(this.isTemperatureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Temperatur im "+haui.Util.numberToMonth(this.month.toString()));
