@@ -41,6 +41,10 @@ exports.readData = function(cb){
             2;NT 4200;2.53 kW;3.4 kWh;14.66 MWh;0044A0313104;268435492;3;00200402;0
             */
             var arr = body.split(";");
+            if(arr[0] !== "master" || arr[17] !== "AT 5000"){
+                logger.verbose("Incorrect data format from solar inverter");
+                return;
+            }
             var currentData = arr[1].split(" ");
             solarData.current = currentData[0];
             solarData.currentUnit = currentData[1];
