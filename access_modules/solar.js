@@ -43,6 +43,7 @@ exports.readData = function(cb){
             var arr = body.split(";");
             if(arr[0] !== "master" || arr[17] !== "AT 5000"){
                 logger.verbose("Incorrect data format from solar inverter");
+                cb("Incorrect data format from solar inverter");
                 return;
             }
             var currentData = arr[1].split(" ");
