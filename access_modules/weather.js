@@ -46,6 +46,12 @@ exports.readWeatherData = function(callback){
 	function readTemperature(cb){
 		tempBricklet.getTemperature(
 			function(temp) {
+                if(temp > 45 || temp -30){
+                    // outlier, ignore
+                    logger.warn("Read temp value which is out of range (< -30 or > 45)");
+                    cb(null, null);
+                    return;                    
+                }
 				cb(null, temp/100);
 			},
 			function(error) {
@@ -59,9 +65,9 @@ exports.readWeatherData = function(callback){
 	function readHumidity(cb){
 		humidityBricklet.getHumidity(
 			function(humidity) {
-                if((humidity/10) < 5){
+                if((humidity/10) < 10){
                     // outlier, ignore
-                    logger.warn("Read humidity which is out of range (< 5 %RH)");
+                    logger.warn("Read humidity which is out of range (< 10 %RH)");
                     cb(null, null);
                     return;
                 }
