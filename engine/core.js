@@ -21,6 +21,11 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
 
             // check if temperature change is bigger than 10 C since the last 20 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 1", function(err, rows){
+                if(!rows[0].val_real){
+                    // first time
+                    db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,1,?)', [ weatherData.temperature ]);
+                    return;
+                }
                 logger.verbose("Last temperature from DB: "+rows[0].val_real);
                 if(weatherData.temperature && Math.abs(rows[0].val_real - weatherData.temperature) <= 10){
                     logger.verbose("Insert new temperature value: "+weatherData.temperature);
@@ -32,8 +37,13 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
             });            
             // check if humidity change is bigger than 10 %RH since the last 20 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 2", function(err, rows){
+                if(!rows[0].val_real){
+                    // first time
+                    db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.humidity ]);
+                    return;
+                }                
                 logger.verbose("Last humidity value from DB: "+rows[0].val_real);
-                if(weatherData.humidity && Math.abs(rows[0].val_real - weatherData.humidity) <= 10){
+                if((rows.length == 0) || (weatherData.humidity && Math.abs(rows[0].val_real - weatherData.humidity) <= 10)){
                     logger.verbose("Insert new humidity value: "+weatherData.humidity);
                     db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.humidity ]);   
                 }
@@ -43,8 +53,13 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
             });
             // check if pressure change is bigger than 2 mBar since the last 20 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 3", function(err, rows){
+                if(!rows[0].val_real){
+                    // first time
+                    db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,3,?)', [ weatherData.pressure ]);
+                    return;
+                }                
                 logger.verbose("Last pressure value from DB: "+rows[0].val_real);
-                if(weatherData.pressure && Math.abs(rows[0].val_real - weatherData.pressure) <= 2){
+                if((rows.length == 0) || (weatherData.pressure && Math.abs(rows[0].val_real - weatherData.pressure) <= 2)){
                     logger.verbose("Insert new pressure value: "+weatherData.pressure);
                     db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,3,?)', [ weatherData.pressure ]);   
                 }
