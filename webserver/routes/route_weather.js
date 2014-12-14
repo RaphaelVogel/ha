@@ -43,6 +43,9 @@ historicHumidityRoute.get(function(req, res){
 			res.status(500).send({ "ERROR" : err });
 			return;
 		}
+        var minMax = getMinMax(weatherData.weatherValues);
+        weatherData.minrange = minMax.minrange;
+        weatherData.maxrange = minMax.maxrange;
 		res.status(200).send(weatherData);
 	});
 });
@@ -56,12 +59,15 @@ historicPressureRoute.get(function(req, res){
 			res.status(500).send({ "ERROR" : err });
 			return;
 		}
+        var minMax = getMinMax(weatherData.weatherValues);
+        weatherData.minrange = minMax.minrange;
+        weatherData.maxrange = minMax.maxrange;
 		res.status(200).send(weatherData);
 	});
 });
 
 function getMinMax(values){
-    var min = 30; max = -20;
+    var min = 1200; max = -30;
     values.forEach(function(item){
         if(item.value > max){
             max = item.value;
@@ -70,8 +76,8 @@ function getMinMax(values){
             min = item.value;
         }
     });
-    min = Math.round(min) - 2;
-    max = Math.round(max) + 2;
+    min = Math.round(min) - 3;
+    max = Math.round(max) + 3;
     return {"minrange": min, "maxrange": max};
 }
 

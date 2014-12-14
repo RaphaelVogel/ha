@@ -34,19 +34,27 @@
                 else if(this.isHumidityChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftfeuchtigkeit im "+haui.Util.numberToMonth(this.month.toString()));
                     weatherChart.getValues()[0].setDisplayName("Luftfeuchtigkeit %RH");
-                    weatherChart.getValueAxis().setMin("0").setMax("100");
                     weatherChartModel.loadData("/weather/historicHumidities?year="+this.year+"&month="+this.month);				
                 }
                 else if(this.isPressureChart()){
                     this.getView().byId("weatherChartPage").setTitle("Luftdruck im "+haui.Util.numberToMonth(this.month.toString()));
                     weatherChart.getValues()[0].setDisplayName("Luftdruck mBar");
-                    weatherChart.getValueAxis().setMin("940").setMax("1060");
                     weatherChartModel.loadData("/weather/historicPressures?year="+this.year+"&month="+this.month);				
                 }
             }
         }, this);
         weatherChartModel.attachRequestCompleted(function(req){
             if(req.getParameters().url.indexOf("historicTemperatures") > -1){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin((that.getView().byId("weatherChart").getModel().getProperty("/minrange")).toString())
+                .setMax((that.getView().byId("weatherChart").getModel().getProperty("/maxrange")).toString());
+            }
+            else if(req.getParameters().url.indexOf("historicHumidities") > -1){
+                that.getView().byId("weatherChart").getValueAxis()
+                .setMin((that.getView().byId("weatherChart").getModel().getProperty("/minrange")).toString())
+                .setMax("100");
+            }
+            else if(req.getParameters().url.indexOf("historicPressures") > -1){
                 that.getView().byId("weatherChart").getValueAxis()
                 .setMin((that.getView().byId("weatherChart").getModel().getProperty("/minrange")).toString())
                 .setMax((that.getView().byId("weatherChart").getModel().getProperty("/maxrange")).toString());
