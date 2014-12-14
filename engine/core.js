@@ -51,7 +51,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     logger.warn("Sensor humidity value "+weatherData.humidity+" is to different from DB pressure value "+rows[0].val_real+". Nothing inserted into DB");
                 }                
             });
-            // check if pressure change is bigger than 2 mBar since the last 20 min -> this is an outlier
+            // check if pressure change is bigger than 3 mBar since the last 20 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 3", function(err, rows){
                 if(!rows[0].val_real){
                     // first time
@@ -59,7 +59,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     return;
                 }                
                 logger.verbose("Last pressure value from DB: "+rows[0].val_real);
-                if(weatherData.pressure && Math.abs(rows[0].val_real - weatherData.pressure) <= 2){
+                if(weatherData.pressure && Math.abs(rows[0].val_real - weatherData.pressure) <= 3){
                     logger.verbose("Insert new pressure value: "+weatherData.pressure);
                     db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,3,?)', [ weatherData.pressure ]);   
                 }
