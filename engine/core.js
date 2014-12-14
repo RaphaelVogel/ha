@@ -19,7 +19,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
             logger.verbose("Weather humidity from sensor:"+weatherData.humidity);
             logger.verbose("Weather pressure from sensor:"+weatherData.pressure);
 
-            // check if temperature change is bigger than 8 C since the last 20 min -> this is an outlier
+            // check if temperature change is bigger than 6 C since the last 20 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 1", function(err, rows){
                 if(!rows[0].val_real){
                     // first time
@@ -27,7 +27,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     return;
                 }
                 logger.verbose("Last temperature from DB: "+rows[0].val_real);
-                if(weatherData.temperature && Math.abs(rows[0].val_real - weatherData.temperature) <= 8){
+                if(weatherData.temperature && Math.abs(rows[0].val_real - weatherData.temperature) <= 6){
                     logger.verbose("Insert new temperature value: "+weatherData.temperature);
                     db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,1,?)', [ weatherData.temperature ]);
                 }
@@ -35,7 +35,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     logger.warn("Sensor temperature value "+weatherData.temperature+" is to different from DB pressure value "+rows[0].val_real+". Nothing inserted into DB");
                 }                 
             });            
-            // check if humidity change is bigger than 8 %RH since the last 20 min -> this is an outlier
+            // check if humidity change is bigger than 6 %RH since the last 20 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 2", function(err, rows){
                 if(!rows[0].val_real){
                     // first time
@@ -43,7 +43,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     return;
                 }                
                 logger.verbose("Last humidity value from DB: "+rows[0].val_real);
-                if(weatherData.humidity && Math.abs(rows[0].val_real - weatherData.humidity) <= 8){
+                if(weatherData.humidity && Math.abs(rows[0].val_real - weatherData.humidity) <= 6){
                     logger.verbose("Insert new humidity value: "+weatherData.humidity);
                     db.run('INSERT INTO sensordata (device_id, sensor_id, val_real) VALUES (1,2,?)', [ weatherData.humidity ]);   
                 }
