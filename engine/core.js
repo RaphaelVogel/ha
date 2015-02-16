@@ -7,7 +7,7 @@ var sqlite3 = require('sqlite3');
 
 
 // Weather job
-var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
+var jobWeather = new CronJob('00 */30 * * * *', function(){ // job starts
     logger.info("Start weather job");
     var db = new sqlite3.Database('../ha.db');
     weather.readWeatherData(function(err, weatherData){
@@ -19,7 +19,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
             logger.verbose("Weather humidity from sensor:"+weatherData.humidity);
             logger.verbose("Weather pressure from sensor:"+weatherData.pressure);
 
-            // check if temperature change is bigger than 6 C since the last 20 min -> this is an outlier
+            // check if temperature change is bigger than 6 C since the last 30 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 1", function(err, rows){
                 if(!rows[0].val_real){
                     // first time
@@ -35,7 +35,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     logger.warn("Sensor temperature value "+weatherData.temperature+" is to different from DB pressure value "+rows[0].val_real+". Nothing inserted into DB");
                 }                 
             });            
-            // check if humidity change is bigger than 10 %RH since the last 20 min -> this is an outlier
+            // check if humidity change is bigger than 10 %RH since the last 30 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 2", function(err, rows){
                 if(!rows[0].val_real){
                     // first time
@@ -51,7 +51,7 @@ var jobWeather = new CronJob('00 */20 * * * *', function(){ // job starts
                     logger.warn("Sensor humidity value "+weatherData.humidity+" is to different from DB pressure value "+rows[0].val_real+". Nothing inserted into DB");
                 }                
             });
-            // check if pressure change is bigger than 3 mBar since the last 20 min -> this is an outlier
+            // check if pressure change is bigger than 3 mBar since the last 30 min -> this is an outlier
             db.all("select max(timestamp), val_real from sensordata where device_id = 1 and sensor_id = 3", function(err, rows){
                 if(!rows[0].val_real){
                     // first time
